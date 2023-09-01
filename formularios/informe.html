@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/informe.css">
+        <link href="../css/select2.min.css" rel="stylesheet" />
+        <script src="../js/jquery-3.7.1.min.js"></script> <!-- Corrección de la ruta de jQuery -->
+        <script src="../js/select2.min.js"></script> <!-- JS para select2, después de jQuery -->
+        <title>Informe de Servicio</title>
+    </head>
+<body>
+    <div class="container">
+        
+        <form>
+            <div class="title">
+                <a href="../index.html" class="menu-button menu-back"></a>
+                <h1>INFORME DE SERVICIO</h1>
+                <input type="text" id="buscarOPNV" name="buscarOPNV" placeholder="Buscar por OP y NV">
+                <!-- Botón imprimir -->
+                 <button type="button" class="menu-button" onclick="window.print();">Imprimir Informe de Servicio</button>
+            </div>
+                
+            <section>
+                <div class="column">
+                    <h3>Información General</h3>
+                    <label for="fechaInicio">Fecha Inicio:</label>
+                    <input type="date" id="fechaInicio" name="fechaInicio" placeholder="dd/mm/aaaa">
+                    
+                    <label for="fechaTermino">Fecha Término:</label>
+                    <input type="date" id="fechaTermino" name="fechaTermino" placeholder="dd/mm/aaaa">
+                    
+                    <label for="numOP">N° OP:</label>
+                    <input type="text" id="numOP" name="numOP" placeholder="Ingrese N° OP">
+                    
+                    <label for="numVenta">N° N. Venta:</label>
+                    <input type="text" id="numVenta" name="numVenta" placeholder="Ingrese N° N. Venta">
+                    
+                    <label for="">RUT Empresa:</label>
+                    <input type="text" id="rutEmpresa" name="rutEmpresa" placeholder="Ej: 12.345.678-9">
+                    
+                    <label for="">Nombre Empresa:</label>
+                    <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la Empresa" readonly>
+                    
+                    <label for="servicio">Servicio:</label>
+                    <textarea id="servicio" name="servicio" placeholder="Ingrese nombre del servicio" rows="14" cols="50"></textarea>
+                </div>
+                
+                
+                <div class="column custom-width">
+                    <h3>Personal Asignado</h3>
+                    
+                    <label for="supervisor">Supervisor:</label>
+                    <input type="number" id="supervisor" name="supervisor" value="0" placeholder="Cantidad de Supervisores">
+                    
+                    <label for="apr">APR:</label>
+                    <input type="number" id="apr" name="apr" value="0" placeholder="Cantidad de APR">
+                    
+                    <label for="m1">M1:</label>
+                    <input type="number" id="m1" name="m1" value="0" placeholder="Cantidad de M1">
+                    
+                    <label for="m2">M2:</label>
+                    <input type="number" id="m2" name="m2" value="0" placeholder="Cantidad de M2">
+                    
+                    <label for="mecanico">Mecánico:</label>
+                    <input type="number" id="mecanico" name="mecanico" value="0" placeholder="Cantidad de Mecánicos">
+                    
+                    <label for="ayudante">Ayudante:</label>
+                    <input type="number" id="ayudante" name="ayudante" value="0" placeholder="Cantidad de Ayudantes">
+                    
+                    <label for="totalTrabajadores">Total de Trabajadores Asignados:</label>
+                    <input type="number" id="totalTrabajadores" name="totalTrabajadores" value="0" readonly placeholder="Ej: 5">
+                    
+                    <label for="tallerTerreno">Taller / Terreno:</label>
+                    <select id="tallerTerreno" name="tallerTerreno">
+                        <option value="Taller">TALLER</option>
+                        <option value="Terreno">TERRENO</option>
+                    </select>
+                
+                    <label for="duracionServicio">Duración del Servicio (Cant. de Horas):</label>
+                    <input type="number" id="duracionServicio" name="duracionServicio" placeholder="Ej: 3">
+                    
+                    <label for="totalHoras">Total HH:</label>
+                    <input type="number" id="totalHoras" name="totalHoras" placeholder="Ej: 24">
+                </div>                
+                
+                <div class="column custom-width">
+                    <h3>Vehículos Asignados</h3>
+                    
+                    <label for="vehiculo1">Vehículo 1:</label>
+                    <select id="vehiculo1" name="vehiculo1">
+                    </select>
+                    
+                    <label for="vehiculo2">Vehículo 2:</label>
+                    <select id="vehiculo2" name="vehiculo2">
+                    </select>
+                    
+                    <label for="vehiculo3">Vehículo 3:</label>
+                    <select id="vehiculo3" name="vehiculo3">
+                    </select>
+                    
+                    <label for="totalKilometros">Total Kilómetros:</label>
+                    <input type="number" id="totalKilometros" name="totalKilometros" placeholder="Ej: 120">
+                    
+                    <label for="totalPeajes">Total Peajes:</label>
+                    <input type="number" id="totalPeajes" name="totalPeajes" placeholder="Ej: 3">
+                    
+                    <label for="totalGastosVehiculos">Total Gastos Vehículos:</label>
+                    <input type="number" id="totalGastosVehiculos" name="totalGastosVehiculos" placeholder="Ej: 5000" value="0" readonly>
+                </div>
+                
+                
+
+                <div class="column">
+                    <div class="column-inside">
+                        <h3>Insumos Ocupados en Servicio</h3>
+                         <!-- Comienzan los campos de insumos -->
+                        <div class="insumo">
+                            <select id="insumo1" name="insumo1"></select>
+                            <input type="number" id="precio1" name="precio1" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad1" name="cantidad1" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo2" name="insumo2"></select>
+                            <input type="number" id="precio2" name="precio2" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad2" name="cantidad2" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo3" name="insumo3"></select>
+                            <input type="number" id="precio3" name="precio3" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad3" name="cantidad3" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo4" name="insumo4"></select>
+                            <input type="number" id="precio4" name="precio4" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad4" name="cantidad4" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo5" name="insumo5"></select>
+                            <input type="number" id="precio5" name="precio5" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad5" name="cantidad5" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo6" name="insumo6"></select>
+                            <input type="number" id="precio6" name="precio6" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad6" name="cantidad6" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo7" name="insumo7"></select>
+                            <input type="number" id="precio7" name="precio7" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad7" name="cantidad7" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo8" name="insumo8"></select>
+                            <input type="number" id="precio8" name="precio8" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad8" name="cantidad8" placeholder="Cant.">
+                        </div>
+                        <div class="insumo">
+                            <select id="insumo9" name="insumo9"></select>
+                            <input type="number" id="precio9" name="precio9" value="0" placeholder="0" readonly>
+                            <input type="number" id="cantidad9" name="cantidad9" placeholder="Cant.">
+                        </div>
+                        <!-- Aquí se añade el campo de Total Gastos Insumos -->
+                            <label for="totalGastosInsumos">Total Gastos Insumos:</label>
+                            <input type="number" id="totalGastosInsumos" name="totalGastosInsumos"  value="0" readonly>
+                    </div>
+                
+                    <div class="column-inside">
+                        <h3>Logística</h3>
+                        <label for="alojamientos">Alojamientos:</label>
+                        <input type="number" id="alojamientos" name="alojamientos" value="0" placeholder="Ej: 3">
+                        
+                        <label for="alimentacion">Alimentación ($):</label>
+                        <input type="number" id="alimentacion" name="alimentacion" value="0" placeholder="Ej: 15000">
+                        
+                        <label for="totalLogistica">Total Logística:</label>
+                        <input type="number" id="totalLogistica" name="totalLogistica" value="0" placeholder="Ej: 20000" readonly>
+                    </div>
+                    
+                </div>
+            </section>
+            <section>
+                <div class="total">
+                    <label for="costoTotal">COSTO TOTAL DEL SERVICIO:</label>
+                    <div class="input-button-wrapper">
+                        <input type="number" id="costoTotal" name="costoTotal" readonly>
+                    </div>
+                </div>                
+            </section>
+        </form>
+        
+    </div>
+    <script src="../js/funciones/informe.js"></script>
+</body>
+</html>
