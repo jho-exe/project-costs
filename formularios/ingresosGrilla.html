@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total de Ingresos</title>
+    <link rel="stylesheet" type="text/css" href="../css/ingresoGrilla.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../lib/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="title-container">
+        <a href="../formularios/informe.html" class="menu-back"></a>
+        <h2>Total de Ingresos</h2>
+    </div>
+    <div class="mantenedor">
+        <div class="table-container">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar ingresos...">
+                <button id="exportToExcel">Exportar a Excel</button>
+            </div>
+            <table id="ingresosTable">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>numOP</th>
+                        <th>fechaInicio</th>
+                        <th>fechaTermino</th>
+                        <th>numVenta</th>
+                        <th>rutEmpresa</th>
+                        <th>nombreEmpresa</th>
+                        <th>servicio</th>
+                        <th>bono</th>
+                        <th>supervisor</th>
+                        <th>valorSupervisor</th>
+                        <th>apr</th>
+                        <th>valorApr</th>
+                        <th>m1</th>
+                        <th>valorM1</th>
+                        <th>m2</th>
+                        <th>valorM2</th>
+                        <th>mecanico</th>
+                        <th>valorMecanico</th>
+                        <th>ayudante</th>
+                        <th>valorAyudante</th>
+                        <th>totalTrabajadores</th>
+                        <th>totalManoObra</th>
+                        <th>tallerTerreno</th>
+                        <th>duracionServicio</th>
+                        <th>totalHoras</th>
+                        <th>vehiculo1</th>
+                        <th>combustible1</th>
+                        <th>vehiculo2</th>
+                        <th>combustible2</th>
+                        <th>vehiculo3</th>
+                        <th>combustible3</th>
+                        <th>totalKilometros</th>
+                        <th>totalPeajes</th>
+                        <th>totalCombustible</th>
+                        <th>totalGastosVehiculos</th>
+                        <th>observaciones</th>
+                        <th>insumo1</th>
+                        <th>precio1</th>
+                        <th>cantidad1</th>
+                        <th>insumo2</th>
+                        <th>precio2</th>
+                        <th>cantidad2</th>
+                        <th>insumo3</th>
+                        <th>precio3</th>
+                        <th>cantidad3</th>
+                        <th>insumo4</th>
+                        <th>precio4</th>
+                        <th>cantidad4</th>
+                        <th>insumo5</th>
+                        <th>precio5</th>
+                        <th>cantidad5</th>
+                        <th>insumo6</th>
+                        <th>precio6</th>
+                        <th>cantidad6</th>
+                        <th>insumo7</th>
+                        <th>precio7</th>
+                        <th>cantidad7</th>
+                        <th>insumo8</th>
+                        <th>precio8</th>
+                        <th>cantidad8</th>
+                        <th>insumo9</th>
+                        <th>precio9</th>
+                        <th>cantidad9</th>
+                        <th>totalGastosInsumos</th>
+                        <th>alojamientos</th>
+                        <th>alimentacion</th>
+                        <th>varios</th>
+                        <th>totalLogistica</th>
+                        <th>fecha_modificacion</th>
+                        <th>fecha_eliminacion</th>
+                        <th>costoTotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí pueden ir las filas con los datos -->
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    <script src="../js/funciones/ingresoGrilla.js"></script>
+</body>
+</html>

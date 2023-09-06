@@ -3,33 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/ingresar.css">
+        <link rel="stylesheet" href="../css/modificar.css">
         <link href="../css/select2.min.css" rel="stylesheet" />
         <script src="../js/jquery-3.7.1.min.js"></script> <!-- Corrección de la ruta de jQuery -->
         <script src="../js/select2.min.js"></script> <!-- JS para select2, después de jQuery -->
-        <title>Formulario de Servicio</title>
-        <script>
-            
-        </script>
-        
-        
+        <title>Formulario de Modificacion Servicio</title>  
     </head>
 <body>
     <div class="container">
         
-        <form id="ingresoForm" method="post">
+        <form id="modificarForm" method="post">
             <div class="title-container">
-                <a href="../index.html" class=" menu-back"></a>
-                <h1 class="title">FORMULARIO DE SERVICIO</h1>
-                
+                <a href="../index.html" class="menu-back"></a>
+                <h1 class="title">FORMULARIO DE MODIFICACION DE SERVICIO</h1>
+                <div class="op-search-container">
+                    <input type="text" placeholder="Ingresar número de OP" />
+                    <button type="button" class="searchOP">Buscar OP</button>
+                </div>
             </div>
+            
             
                 
             <section>
                 <div class="column">
                     <h3>Información General</h3>
                     <label for="numOP">N° OP:</label>
-                    <input type="text" id="numOP" name="numOP" placeholder="Ingrese N° OP" required>
+                    <input type="text" id="numOP" name="numOP" placeholder="Ingrese N° OP" required disabled>
 
                     <label for="fechaInicio">Fecha Inicio:</label>
                     <input type="date" id="fechaInicio" name="fechaInicio" placeholder="dd/mm/aaaa">
@@ -198,7 +197,7 @@
                         </button>
                     </div>
                     <label for="observaciones">Observaciones:</label>
-                    <textarea id="observaciones" name="observaciones" placeholder="Ingrese una observacion (opcional)" rows="8" cols="50"></textarea>
+                    <textarea id="observaciones" name="observaciones" placeholder="Ingrese una observacion (opcional)" rows="10" cols="50"></textarea>
                 </div>
 
                 <div class="column">
@@ -252,7 +251,7 @@
                         </div>
                         <!-- Aquí se añade el campo de Total Gastos Insumos -->
                             <label for="totalGastosInsumos">Total Gastos Insumos:</label>
-                            <input type="number" id="totalGastosInsumos" name="totalGastosInsumos" class="subTotal" value="0" placeholder="0" readonly>
+                            <input type="number" id="totalGastosInsumos" name="totalGastosInsumos" class="subTotal" value="0" readonly>
                     </div>
                 
                     <div class="column-inside">
@@ -273,8 +272,7 @@
                         <label for="totalLogistica">Total Logística:</label>
                         <input type="number" id="totalLogistica" name="totalLogistica" value="0" class="subTotal" placeholder="Ej: 20000" readonly>
                     </div>
-                    <input type="hidden" name="fecha_modificacion" value="">
-                    <input type="hidden" name="fecha_eliminacion" value="">
+                    
                 </div>
             </section>
             <section id="costo">
@@ -282,7 +280,7 @@
                     <div class="content-left">
                         <label for="costoTotal">COSTO TOTAL DEL SERVICIO:</label>
                         <div class="input-button-wrapper">
-                            <input type="number" id="costoTotal" name="costoTotal" class="Total" value="0" placeholder="0" readonly>
+                            <input type="number" id="costoTotal" name="costoTotal" class="Total" value="0" readonly>
                         </div>
                     </div>
                     <div class="content-right">
@@ -292,6 +290,6 @@
             </section>
         </form>
     </div>
-    <script src="../js/funciones/ingresar.js"></script>
+    <script src="../js/funciones/modificar.js"></script>
 </body>
 </html>

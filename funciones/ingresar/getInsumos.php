@@ -1,12 +1,12 @@
 <?php
-include '../includes/db_connection.php';
+include '../../includes/db_connection.php';
 
 // Verificar conexión
 if (!$conn) {
     die(json_encode(['error' => 'Failed to connect to the database']));
 }
 
-$query = "SELECT id, nombre, precio FROM insumos";
+$query = "SELECT id, nombre, precio FROM insumos WHERE estado = 'Activo'";
 $stmt = $conn->prepare($query);
 
 if (!$stmt) {

@@ -1,0 +1,371 @@
+:root {
+    --primary-color: #01796F;
+    --primary-color-dark: #005F47;
+    --input-border-color: #d0d0d0;
+    --input-focus-border-color: var(--primary-color);
+    --label-color: #696969;
+    --heading-color: #303030;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color-dark: rgba(0, 0, 0, 0.2);
+    --column-color: #e6e6e6;
+    --column-hover-color: #cccccc;
+    --font-family-modern: "Poppins", sans-serif;
+    --transition-speed: 0.3s;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-color: #e8eaf6;
+    font-family: var(--font-family-modern);
+}
+
+.mantenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    overflow: hidden;
+    min-height: 60vh; /* Asegura que el mantenedor tenga una altura mínima */
+}
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; /* Centra los elementos verticalmente */
+    gap: 20px;
+    width: 100%; /* Esto establece el ancho del contenedor del formulario a un 100% */
+    max-width: calc(100% - 40px); /* Esto evitará que el .form-container sea más grande que el .mantenedor, teniendo en cuenta el relleno de 20px en cada lado del .mantenedor */
+    margin: 0 auto; /* Esto centrará el contenedor del formulario */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: box-shadow 0.3s;
+}
+
+
+
+.column {
+    flex: 1; 
+    padding: 0 20px; /* Ajustar el relleno para más espacio dentro de las columnas */
+}
+
+
+.form-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.input-group {
+    margin-bottom: 0.5em; 
+}
+
+.input-group label {
+    display: block;
+    color: var(--label-color);
+    margin-bottom: 0.8em; 
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 93%;
+    padding: 0.5em; 
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    font-size: 0.85em; 
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    margin-top: 0.3em;
+    background-color: #f9f9f9;
+    outline: none;
+}
+
+.input-group input::placeholder, 
+.input-group textarea::placeholder {
+    color: var(--label-color); 
+    opacity: 0.7; 
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 12px rgba(0, 150, 136, 0.2); 
+}
+
+.mantenedor h2 {
+    color: var(--heading-color);
+    font-weight: 700;
+    margin-bottom: 2em;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--input-border-color);
+    padding-bottom: 0.5em;
+}
+
+.table-container {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+.actions button {
+    flex: 1;
+    margin: 0 0.5em;
+    padding: 0.75em 1.5em;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    text-transform: uppercase;
+}
+
+.actions button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+
+/* ... Continua como en tu código CSS, solo cambiando los colores y algún valor para ajustarse al nuevo diseño ... */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3em;
+}
+
+table, th, td {
+    border: 1px solid var(--input-border-color);
+}
+
+table th, 
+table td {
+    padding: 0.75em 1.5em;
+    text-align: left;
+}
+
+table th {
+    background-color: var(--column-color);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+table tr:hover {
+    background-color: var(--column-hover-color);
+    transition: background-color var(--transition-speed);
+}
+
+table td .editar,
+table td .borrar {
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.9em;
+    transition: opacity var(--transition-speed);
+}
+
+table td .editar {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+table td .borrar {
+    background-color: #ff5e5e;
+    color: #fff;
+}
+
+table td .editar:hover,
+table td .borrar:hover {
+    opacity: 0.8;
+}
+
+.menu-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    width: 50px;  /* Ancho del botón, haciéndolo circular */
+    height: 50px; /* Altura del botón, haciéndolo circular */
+    border-radius: 50%; /* Hace el botón completamente circular */
+    background-color: var(--primary-color); /* Usa tu color primario */
+    position: relative; /* Se establece como relativo para el pseudoelemento y la animación */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones para efectos hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    animation: pulse 1.5s infinite;
+}
+
+.menu-back:before {
+    content: "←";
+    font-size: 24px;
+    transition: transform 0.3s; /* Transición para el movimiento de la flecha */
+    color: #fff; /* Color blanco para el ícono para contrastar con el color primario */
+}
+
+.menu-back:hover:before {
+    transform: translateX(-5px); /* Al hacer hover, la flecha se moverá ligeramente a la izquierda */
+}
+
+.menu-back:hover {
+    transform: scale(1.05); /* Al hacer hover, el botón se agrandará ligeramente */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra más prominente en hover */
+}
+
+/* Animación pulsante */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 150, 136, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 150, 136, 0.5), 0 0 30px rgba(0, 150, 136, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 150, 136, 0.7);
+    }
+}
+
+.menu-back {
+    animation: pulse 1.5s infinite; /* Aplicando la animación pulsante al botón */
+}
+
+.title-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    overflow: hidden; /* Para que respete los bordes redondeados */
+    display: flex;
+
+    align-items: center; /* Alinea verticalmente los elementos al centro */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    background-color: #f8f9fa  ; /* Color de fondo */
+
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    margin-bottom: 20px; /* Margen inferior para separarlo de otros elementos */
+
+}
+
+
+.search-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#searchInput {
+    padding: 0.75em 1em;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all var(--transition-speed);
+    outline: none;
+}
+
+#searchInput:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 8px rgba(0, 150, 136, 0.1);
+}
+
+#searchInput::placeholder {
+    color: var(--label-color);
+    opacity: 0.7;
+}
+
+#exportToExcel {
+    background-color: #4CAF50; /* Verde */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s; /* Efecto de transición */
+    cursor: pointer;
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Sombras */
+}
+
+#exportToExcel:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Borde al hacer hover */
+}
+
+/* Responsive design */
+@media only screen and (max-width: 768px) {
+    .mantenedor {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .form-container {
+        flex-direction: column; /* Stack elements vertically */
+        width: 90%;
+        padding: 15px;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        width: 100%;
+        font-size: 1em;
+    }
+
+    .actions button {
+        font-size: 0.9em;
+        margin: 5px 0;
+    }
+
+    /* Adjust other styles for smaller screens */
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 3em;
+    }
+
+    table, th, td {
+        border: 1px solid var(--input-border-color);
+    }
+
+    table th, 
+    table td {
+        padding: 0.75em 1.5em;
+        text-align: left;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    table th {
+        background-color: var(--column-color);
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    table tr {
+        margin-bottom: 0.75em;
+        display: block;
+        background-color: var(--column-color);
+    }
+
+    table tr:hover {
+        background-color: var(--column-hover-color);
+        transition: background-color var(--transition-speed);
+    }
+}

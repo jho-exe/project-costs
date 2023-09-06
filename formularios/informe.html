@@ -4,192 +4,306 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/informe.css">
-        <link href="../css/select2.min.css" rel="stylesheet" />
-        <script src="../js/jquery-3.7.1.min.js"></script> <!-- Corrección de la ruta de jQuery -->
-        <script src="../js/select2.min.js"></script> <!-- JS para select2, después de jQuery -->
         <title>Informe de Servicio</title>
-    </head>
+        <script src="../js/jquery-3.7.1.min.js"></script> <!-- Corrección de la ruta de jQuery -->
+</head>
 <body>
-    <div class="container">
-        
-        <form>
-            <div class="title">
-                <a href="../index.html" class="menu-button menu-back"></a>
-                <h1>INFORME DE SERVICIO</h1>
-                <input type="text" id="buscarOPNV" name="buscarOPNV" placeholder="Buscar por OP y NV">
-                <!-- Botón imprimir -->
-                 <button type="button" class="menu-button" onclick="window.print();">Imprimir Informe de Servicio</button>
-            </div>
-                
-            <section>
-                <div class="column">
-                    <h3>Información General</h3>
-                    <label for="fechaInicio">Fecha Inicio:</label>
-                    <input type="date" id="fechaInicio" name="fechaInicio" placeholder="dd/mm/aaaa">
-                    
-                    <label for="fechaTermino">Fecha Término:</label>
-                    <input type="date" id="fechaTermino" name="fechaTermino" placeholder="dd/mm/aaaa">
-                    
-                    <label for="numOP">N° OP:</label>
-                    <input type="text" id="numOP" name="numOP" placeholder="Ingrese N° OP">
-                    
-                    <label for="numVenta">N° N. Venta:</label>
-                    <input type="text" id="numVenta" name="numVenta" placeholder="Ingrese N° N. Venta">
-                    
-                    <label for="">RUT Empresa:</label>
-                    <input type="text" id="rutEmpresa" name="rutEmpresa" placeholder="Ej: 12.345.678-9">
-                    
-                    <label for="">Nombre Empresa:</label>
-                    <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la Empresa" readonly>
-                    
-                    <label for="servicio">Servicio:</label>
-                    <textarea id="servicio" name="servicio" placeholder="Ingrese nombre del servicio" rows="14" cols="50"></textarea>
-                </div>
-                
-                
-                <div class="column custom-width">
-                    <h3>Personal Asignado</h3>
-                    
-                    <label for="supervisor">Supervisor:</label>
-                    <input type="number" id="supervisor" name="supervisor" value="0" placeholder="Cantidad de Supervisores">
-                    
-                    <label for="apr">APR:</label>
-                    <input type="number" id="apr" name="apr" value="0" placeholder="Cantidad de APR">
-                    
-                    <label for="m1">M1:</label>
-                    <input type="number" id="m1" name="m1" value="0" placeholder="Cantidad de M1">
-                    
-                    <label for="m2">M2:</label>
-                    <input type="number" id="m2" name="m2" value="0" placeholder="Cantidad de M2">
-                    
-                    <label for="mecanico">Mecánico:</label>
-                    <input type="number" id="mecanico" name="mecanico" value="0" placeholder="Cantidad de Mecánicos">
-                    
-                    <label for="ayudante">Ayudante:</label>
-                    <input type="number" id="ayudante" name="ayudante" value="0" placeholder="Cantidad de Ayudantes">
-                    
-                    <label for="totalTrabajadores">Total de Trabajadores Asignados:</label>
-                    <input type="number" id="totalTrabajadores" name="totalTrabajadores" value="0" readonly placeholder="Ej: 5">
-                    
-                    <label for="tallerTerreno">Taller / Terreno:</label>
-                    <select id="tallerTerreno" name="tallerTerreno">
-                        <option value="Taller">TALLER</option>
-                        <option value="Terreno">TERRENO</option>
-                    </select>
-                
-                    <label for="duracionServicio">Duración del Servicio (Cant. de Horas):</label>
-                    <input type="number" id="duracionServicio" name="duracionServicio" placeholder="Ej: 3">
-                    
-                    <label for="totalHoras">Total HH:</label>
-                    <input type="number" id="totalHoras" name="totalHoras" placeholder="Ej: 24">
-                </div>                
-                
-                <div class="column custom-width">
-                    <h3>Vehículos Asignados</h3>
-                    
-                    <label for="vehiculo1">Vehículo 1:</label>
-                    <select id="vehiculo1" name="vehiculo1">
-                    </select>
-                    
-                    <label for="vehiculo2">Vehículo 2:</label>
-                    <select id="vehiculo2" name="vehiculo2">
-                    </select>
-                    
-                    <label for="vehiculo3">Vehículo 3:</label>
-                    <select id="vehiculo3" name="vehiculo3">
-                    </select>
-                    
-                    <label for="totalKilometros">Total Kilómetros:</label>
-                    <input type="number" id="totalKilometros" name="totalKilometros" placeholder="Ej: 120">
-                    
-                    <label for="totalPeajes">Total Peajes:</label>
-                    <input type="number" id="totalPeajes" name="totalPeajes" placeholder="Ej: 3">
-                    
-                    <label for="totalGastosVehiculos">Total Gastos Vehículos:</label>
-                    <input type="number" id="totalGastosVehiculos" name="totalGastosVehiculos" placeholder="Ej: 5000" value="0" readonly>
-                </div>
-                
-                
 
-                <div class="column">
-                    <div class="column-inside">
-                        <h3>Insumos Ocupados en Servicio</h3>
-                         <!-- Comienzan los campos de insumos -->
-                        <div class="insumo">
-                            <select id="insumo1" name="insumo1"></select>
-                            <input type="number" id="precio1" name="precio1" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad1" name="cantidad1" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo2" name="insumo2"></select>
-                            <input type="number" id="precio2" name="precio2" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad2" name="cantidad2" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo3" name="insumo3"></select>
-                            <input type="number" id="precio3" name="precio3" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad3" name="cantidad3" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo4" name="insumo4"></select>
-                            <input type="number" id="precio4" name="precio4" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad4" name="cantidad4" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo5" name="insumo5"></select>
-                            <input type="number" id="precio5" name="precio5" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad5" name="cantidad5" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo6" name="insumo6"></select>
-                            <input type="number" id="precio6" name="precio6" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad6" name="cantidad6" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo7" name="insumo7"></select>
-                            <input type="number" id="precio7" name="precio7" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad7" name="cantidad7" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo8" name="insumo8"></select>
-                            <input type="number" id="precio8" name="precio8" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad8" name="cantidad8" placeholder="Cant.">
-                        </div>
-                        <div class="insumo">
-                            <select id="insumo9" name="insumo9"></select>
-                            <input type="number" id="precio9" name="precio9" value="0" placeholder="0" readonly>
-                            <input type="number" id="cantidad9" name="cantidad9" placeholder="Cant.">
-                        </div>
-                        <!-- Aquí se añade el campo de Total Gastos Insumos -->
-                            <label for="totalGastosInsumos">Total Gastos Insumos:</label>
-                            <input type="number" id="totalGastosInsumos" name="totalGastosInsumos"  value="0" readonly>
-                    </div>
-                
-                    <div class="column-inside">
-                        <h3>Logística</h3>
-                        <label for="alojamientos">Alojamientos:</label>
-                        <input type="number" id="alojamientos" name="alojamientos" value="0" placeholder="Ej: 3">
-                        
-                        <label for="alimentacion">Alimentación ($):</label>
-                        <input type="number" id="alimentacion" name="alimentacion" value="0" placeholder="Ej: 15000">
-                        
-                        <label for="totalLogistica">Total Logística:</label>
-                        <input type="number" id="totalLogistica" name="totalLogistica" value="0" placeholder="Ej: 20000" readonly>
-                    </div>
-                    
-                </div>
-            </section>
-            <section>
-                <div class="total">
-                    <label for="costoTotal">COSTO TOTAL DEL SERVICIO:</label>
-                    <div class="input-button-wrapper">
-                        <input type="number" id="costoTotal" name="costoTotal" readonly>
-                    </div>
-                </div>                
-            </section>
-        </form>
+    <div class="search-box">
+        <a href="../index.html" class=" menu-back"></a>
+        <input type="text" id="searchOp" placeholder="Buscar por Número de OP" class="styled-input">
+        <button id="btnBuscar" class="btn btn-buscar">Buscar</button>
+        <button id="btnImprimir" class="btn btn-imprimir">Imprimir</button>
+        <a href="../formularios/ingresosGrilla.html" id="btnIngreso" class="btn btn-ingresos">Total de Ingresos</a>
+    </div>
+     
+
+<div class="container">
+    <div class="header">
+        <h1>Informe de Servicio</h1>
+        <p id="fechaInforme" >Fecha de Informe: [Fecha de hoy]</p>
+    </div>
+
+    <div class="columns">
+        <div class="section">
+            <h2>Detalles Generales</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <td id='id'></td>
+                </tr>
+                <tr>
+                    <th>Número de OP</th>
+                    <td id='numOP'>OP-2023-001</td>
+                </tr>
+                <tr>
+                    <th>Fecha de Inicio</th>
+                    <td id='fechaInicio'>2023-09-15</td>
+                </tr>
+                <tr>
+                    <th>Fecha de Término</th>
+                    <td id='fechaTermino'>2023-09-18</td>
+                </tr>
+                <tr>
+                    <th>Número de Venta</th>
+                    <td id='numVenta'>[Número de Venta]</td>
+                </tr>
+                <tr>
+                    <th>RUT de Empresa</th>
+                    <td id='rutEmpresa'>12.345.678-9</td>
+                </tr>
+                <tr>
+                    <th>Nombre de Empresa</th>
+                    <td id='nombreEmpresa'>Empresa Ejemplo S.A.</td>
+                </tr>
+                <tr>
+                    <th>Servicio</th>
+                    <td id='servicio'>Servicio de Mantenimiento</td>
+                </tr>
+                <!-- Agrega más campos aquí si es necesario -->
+            </table>
+            
+            <h2>Vehículos Asignados</h2>
+                <table>
+                    <tr>
+                        <th>Vehículo 1</th>
+                        <td id='vehiculo1'>[Vehículo 1]</td>
+                        <th>Combustible 1</th>
+                        <td id='combustible1'>[Combustible 1]</td>
+                    </tr>
+                    <tr>
+                        <th>Vehículo 2</th>
+                        <td id='vehiculo2'>[Vehículo 2]</td>
+                        <th>Combustible 2</th>
+                        <td id='combustible2'>[Combustible 2]</td>
+                    </tr>
+                    <tr>
+                        <th>Vehículo 3</th>
+                        <td id='vehiculo3'>[Vehículo 3]</td>
+                        <th>Combustible 3</th>
+                        <td id='combustible3'>[Combustible 3]</td>
+                    </tr>
+                    <tr>
+                        <th>Total Kilómetros</th>
+                        <td class="subTotal" id='totalKilometros' colspan="3">[Total Kilómetros]</td>
+                    </tr>
+                    <tr>
+                        <th>Total Peajes</th>
+                        <td class="subTotal" id='totalPeajes' colspan="3">[Total Peajes]</td>
+                    </tr>
+                    <tr>
+                        <th>Total Combustible</th>
+                        <td class="subTotal" id='totalCombustible' colspan="3">[Total Combustible]</td>
+                    </tr>
+                    <tr>
+                        <th>Total Gastos de Vehículos</th>
+                        <td class="subTotal" id='totalGastosVehiculos' colspan="3">[Total Gastos de Vehículos]</td>
+                    </tr>
+                    <tr>
+                        <th>Observaciones</th>
+                        <td id='observaciones' colspan="3">[Observaciones]</td>
+                    </tr>
+                </table>
+
+        </div>
+            
+        <div class="section">
+            <h2>Detalles de Servicio</h2>
+            <table>
+                <tr>
+                    <th>Bono</th>
+                    <td id='bono'>B T Dia</td>
+                </tr>
+                <tr>
+                    <th>Supervisor</th>
+                    <td id='supervisor'>John Doe</td>
+                </tr>
+                <tr>
+                    <th>Valor del Supervisor</th>
+                    <td id='valorSupervisor'>$150.00</td>
+                </tr>
+                <tr>
+                    <th>APR</th>
+                    <td id='apr'>[APR]</td>
+                </tr>
+                <tr>
+                    <th>Valor APR</th>
+                    <td id='valorApr'>[Valor APR]</td>
+                </tr>
+                <tr>
+                    <th>M1</th>
+                    <td id='m1'>[M1]</td>
+                </tr>
+                <tr>
+                    <th>Valor M1</th>
+                    <td id='valorM1'>[Valor M1]</td>
+                </tr>
+                <tr>
+                    <th>M2</th>
+                    <td id='m2'>[M2]</td>
+                </tr>
+                <tr>
+                    <th>Valor M2</th>
+                    <td id='valorM2'>[Valor M2]</td>
+                </tr>
+                <tr>
+                    <th>Mecánico</th>
+                    <td id='mecanico'>[Mecánico]</td>
+                </tr>
+                <tr>
+                    <th>Valor Mecánico</th>
+                    <td id='valorMecanico'>[Valor Mecánico]</td>
+                </tr>
+                <tr>
+                    <th>Ayudante</th>
+                    <td id='ayudante'>[Ayudante]</td>
+                </tr>
+                <tr>
+                    <th>Valor Ayudante</th>
+                    <td id='valorAyudante'>[Valor Ayudante]</td>
+                </tr>
+                <tr>
+                    <th>Total de Trabajadores</th>
+                    <td id='totalTrabajadores'>5</td>
+                </tr>
+                <tr>
+                    <th>Total de Mano de Obra</th>
+                    <td class="subTotal" id='totalManoObra'>$500.00</td>
+                </tr>
+                <tr>
+                    <th>Taller o Terreno</th>
+                    <td id='tallerTerreno'>[Taller o Terreno]</td>
+                </tr>
+                <tr>
+                    <th>Duración del Servicio</th>
+                    <td id='duracionServicio'>[Duración del Servicio]</td>
+                </tr>
+                <tr>
+                    <th>Total de Horas</th>
+                    <td id='totalHoras'>[Total de Horas]</td>
+                </tr>
+                <!-- Agrega más campos aquí si es necesario -->
+            </table>
+            
+        </div>
+        <div class="section">
+            <h2>Insumos Ocupados en Servicio</h2>
+            <table>
+                <tr>
+                    <th>Insumo 1</th>
+                    <td id='insumo1'>[Insumo 1]</td>
+                    <th>Precio 1</th>
+                    <td id='precio1'>[Precio 1]</td>
+                    <th>Cantidad 1</th>
+                    <td id='cantidad1'>[Cantidad 1]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 2</th>
+                    <td id='insumo2'>[Insumo 2]</td>
+                    <th>Precio 2</th>
+                    <td id='precio2'>[Precio 2]</td>
+                    <th>Cantidad 2</th>
+                    <td id='cantidad2'>[Cantidad 2]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 3</th>
+                    <td id='insumo3'>[Insumo 3]</td>
+                    <th>Precio 3</th>
+                    <td id='precio3'>[Precio 3]</td>
+                    <th>Cantidad 3</th>
+                    <td id='cantidad3'>[Cantidad 3]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 4</th>
+                    <td id='insumo4'>[Insumo 4]</td>
+                    <th>Precio 4</th>
+                    <td id='precio4'>[Precio 4]</td>
+                    <th>Cantidad 4</th>
+                    <td id='cantidad4'>[Cantidad 4]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 5</th>
+                    <td id='insumo5'>[Insumo 5]</td>
+                    <th>Precio 5</th>
+                    <td id='precio5'>[Precio 5]</td>
+                    <th>Cantidad 5</th>
+                    <td id='cantidad5'>[Cantidad 5]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 6</th>
+                    <td id='insumo6'>[Insumo 6]</td>
+                    <th>Precio 6</th>
+                    <td id='precio6'>[Precio 6]</td>
+                    <th>Cantidad 6</th>
+                    <td id='cantidad6'>[Cantidad 6]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 7</th>
+                    <td id='insumo7'>[Insumo 7]</td>
+                    <th>Precio 7</th>
+                    <td id='precio7'>[Precio 7]</td>
+                    <th>Cantidad 7</th>
+                    <td id='cantidad7'>[Cantidad 7]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 8</th>
+                    <td id='insumo8'>[Insumo 8]</td>
+                    <th>Precio 8</th>
+                    <td id='precio8'>[Precio 8]</td>
+                    <th>Cantidad 8</th>
+                    <td id='cantidad8'>[Cantidad 8]</td>
+                </tr>
+                <tr>
+                    <th>Insumo 9</th>
+                    <td id='insumo9'>[Insumo 9]</td>
+                    <th>Precio 9</th>
+                    <td id='precio9'>[Precio 9]</td>
+                    <th>Cantidad 9</th>
+                    <td id='cantidad9'>[Cantidad 9]</td>
+                </tr>
+                <tr>
+                    <th>Total Gastos de Insumos</th>
+                    <td class="subTotal" id='totalGastosInsumos' colspan="5">[Total Gastos de Insumos]</td>
+                </tr>
+            </table>
+
+            <h2>Logística</h2>
+            <table>
+                <tr>
+                    <th>Alojamientos</th>
+                    <td id='alojamientos'>[Alojamientos]</td>
+                </tr>
+                <tr>
+                    <th>Alimentación</th>
+                    <td id='alimentacion'>[Alimentación]</td>
+                </tr>
+                <tr>
+                    <th>Varios</th>
+                    <td id='varios'>[Varios]</td>
+                </tr>
+                <tr>
+                    <th>Total Logística</th>
+                    <td class="subTotal" id='totalLogistica'>[Total Logística]</td>
+                </tr>
+            </table>
+            
+            <h2>Costo Total</h2>
+            <table>
+                <tr>
+                    <th>Costo Total del Servicio</th>
+                    <td class="total" id='costoTotal'>[Costo Total del Servicio]</td>
+                </tr>
+            </table>
+        </div>
         
     </div>
-    <script src="../js/funciones/informe.js"></script>
+
+    <div class="footer">
+        <p>[Sociedad Comercial Polybandas Limitada]</p>
+    </div>
+</div>
+
+<script src="../js/funciones/informe.js"></script>
+
 </body>
 </html>

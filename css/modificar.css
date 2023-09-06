@@ -491,6 +491,31 @@ textarea {
     margin-bottom: 20px; /* Margen inferior para separarlo de otros elementos */
 }
 
+.op-search-container {
+    display: flex;
+    align-items: space-between;
+}
+
+.op-search-container input {
+    margin-right: 10px;
+}
+
+.searchOP{
+    background-color: var(--primary-color);; /* Color de fondo */
+    color: #ffffff;           /* Color del texto */
+    border: none;             /* Elimina el borde predeterminado */
+    padding: 10px 20px;       /* Relleno alrededor del texto */
+    font-size: 16px;          /* Tamaño del texto */
+    border-radius: 4px;       /* Esquinas redondeadas */
+    cursor: pointer;          /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s; /* Efecto suave al cambiar el color de fondo */
+    width: 300px;  
+}
+
+.searchOP:hover{
+        background-color: var(--primary-color-dark); /* Color de fondo al pasar el mouse por encima */
+}
+
 .title {
     margin: 0; /* Remueve márgenes por defecto de h1 */
     color: #333; /* Color del texto */

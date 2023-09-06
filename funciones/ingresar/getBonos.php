@@ -1,5 +1,5 @@
 <?php
-include '../includes/db_connection.php';
+include '../../includes/db_connection.php';
 
 // Establece el encabezado de respuesta como JSON.
 header('Content-Type: application/json');

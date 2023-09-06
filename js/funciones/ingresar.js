@@ -1,31 +1,10 @@
-// $(document).ready(function() {
-//     function actualizarCostoTotal() {
-//         let sumaTotal = 0;
-        
-//         $('.subTotal').each(function() {
-//             sumaTotal += Number($(this).val()) || 0;
-//         });
-
-//         $('#costoTotal').val(sumaTotal);
-//     }
-
-//     $('.subTotal').on('change', function() {
-//         actualizarCostoTotal();
-//     });
-
-//     // Suponiendo que actualizas el valor de un input llamado totalLogistica en alguna parte de tu código
-//     $('#totalLogistica').val(nuevoValor).trigger('change');
-// });
-
-
-
 
 $(document).ready(function() {
     // Obtener empresa
     $("#rutEmpresa").blur(function() {
         var rut = $(this).val();
 
-        $.post('../funciones/getEmpresa.php', { rut: rut }, function(data) {
+        $.post('../funciones/ingresar/getEmpresa.php', { rut: rut }, function(data) {
             if (data && data.RazonSocial) {
                 $("#nombreEmpresa").val(data.RazonSocial);
             } else {
@@ -62,20 +41,16 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-
     // Inicialización del select2 para todos los selectores de insumo
     $('.select-insumo').select2();
-
     // Revisar inicialmente el estado de todos los campos de precio
     $('.precio').each(function() {
         toggleCantidad($(this));
     });
-
     // Observador para el evento change en todos los precios
     $('.precio').change(function() {
         toggleCantidad($(this));
     });
-
     // Cuando cambie el valor de cualquier selector de insumo usando select2
     $('.select-insumo').on('change', function() {
         var precioInput = $(this).closest('.insumo').find('.precio');
@@ -111,7 +86,7 @@ $(document).ready(function() {
 
         // Usar AJAX para obtener el valor de 'costohh' desde la base de datos
         $.ajax({
-            url: '../funciones/getCosto.php', // Ruta a tu archivo PHP
+            url: '../funciones/ingresar/getCosto.php', // Ruta a tu archivo PHP
             type: 'POST',
             data: {
                 cargo: tipoCargo // Enviar el tipo de cargo al servidor
@@ -160,7 +135,6 @@ $(document).ready(function() {
         totalTrabajadoresInput.val(total);
         calcularTotalHoras();  // Aquí se llama a calcularTotalHoras después de actualizar el total de trabajadores
     }
-
     // Función para calcular total de horas hombre
     function calcularTotalHoras() {
         const totalTrabajadores = Number(totalTrabajadoresInput.val()) || 0;
@@ -169,7 +143,6 @@ $(document).ready(function() {
         const totalHoras = totalTrabajadores * duracionServicio;
         totalHorasInput.val(totalHoras);
     }
-
     // Event listeners usando change
     supervisorInput.on('change', calcularTotalTrabajadores);
     aprInput.on('change', calcularTotalTrabajadores);
@@ -194,6 +167,56 @@ $(document).ready(function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    let idsDeCampos = [
+        'totalManoObra', 
+        'totalGastosVehiculos', 
+        'totalGastosInsumos', 
+        'totalLogistica'
+    ];
+
+    setInterval(calcularTotal, 1000); // Esto hará que la función se ejecute cada 1 segundo
+
+    idsDeCampos.forEach(id => {
+        let campo = document.getElementById(id);
+        if (campo) {
+            campo.addEventListener('input', calcularTotal);
+        } else {
+            console.error('No se encontró el campo con ID "' + id + '"');
+        }
+    });
+    
+    calcularTotal(); // Esto hará que la función se ejecute también al cargar la página
+});
+
+function calcularTotal() {
+    let idsDeCampos = [
+        'totalManoObra', 
+        'totalGastosVehiculos', 
+        'totalGastosInsumos', 
+        'totalLogistica'
+    ];
+    let sum = 0;
+
+    idsDeCampos.forEach(id => {
+        let campo = document.getElementById(id);
+        if (campo) {
+            let valor = parseFloat(campo.value);
+            if (!isNaN(valor)) {
+                sum += valor;
+            }
+        } else {
+            console.error('No se encontró el campo con ID "' + id + '"');
+        }
+    });
+
+    let campoCostoTotal = document.getElementById('costoTotal');
+    if (campoCostoTotal) {
+        campoCostoTotal.value = sum; // establece el valor de costototal al total calculado
+    } else {
+        console.error('No se encontró el campo con ID "costototal"');
+    }
+}
     
 $(document).ready(function() {
     const alojamientosInput = $('#alojamientos');
@@ -217,7 +240,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    
     function showNotification(message, type = 'success') {
         // Crear el popup si no existe
         if (!$('.notification-popup').length) {
@@ -225,7 +247,6 @@ $(document).ready(function() {
         }
 
         const $notification = $('.notification-popup');
-        
         // Configurar el mensaje y el tipo (si es error)
         $notification.text(message);
         if (type === 'error') {
@@ -233,7 +254,6 @@ $(document).ready(function() {
         } else {
             $notification.removeClass('error');
         }
-
         // Mostrar el popup
         $notification.css('bottom', '30px');
          // Mostrar el popup
@@ -253,12 +273,9 @@ $(document).ready(function() {
             if (callback) callback();
         }
     }
-    
-    
-            // Función para calcular el total
+
     function calcularTotal() {
         let suma = 0;
-
         // Iteramos sobre cada campo con clase 'valor'
         $(".valor").each(function() {
             let valor = parseFloat($(this).val()); // Convertimos el valor del campo a número
@@ -266,7 +283,6 @@ $(document).ready(function() {
                 suma += valor;
             }
         });
-
         // Actualizamos el campo totalManoObra con la suma
         $("#totalManoObra").val(suma);
     }
@@ -325,16 +341,22 @@ $(document).ready(function() {
     });
 
     let bonos = [];
+    let seleccionarBono = [];
 
     function obtenerBonos() {
-        $.get('../funciones/getBonos.php', function(data) {
+        $.get('../funciones/ingresar/getBonos.php', function(data) {
+            bonos = data;
+        });
+    }
+
+    function obtenerBonos() {
+        $.get('../funciones/ingresar/getBonos.php', function(data) {
             bonos = data;
         });
     }
 
     function aplicarBono() {
         let bonoSeleccionado = $('#bono').val();
-    
         $('.input-group').each(function() {
             let $this = $(this);
             let cantidadTrabajadores = parseFloat($this.find('input:first-child').val());
@@ -344,7 +366,6 @@ $(document).ready(function() {
                 $this.find('.valor').val(0);
                 return true; // equivalente a 'continue' en un bucle normal
             }
-    
             let cargoLabel = $this.prev('label').text().replace(':', '').trim();
             let bonoValue = 0;
     
@@ -354,10 +375,12 @@ $(document).ready(function() {
                     break;
                 }
             }
+            // Comprueba si el data-original existe antes de sobrescribirlo, para preservar el valor original
+            if ($this.find('.valor').data('original') === undefined) {
+                $this.find('.valor').data('original', parseFloat($this.find('.valor').val()));
+            }
+            let originalValue = parseFloat($this.find('.valor').data('original'));
     
-            let originalValue = parseFloat($this.find('.valor').data('original') || $this.find('.valor').val());
-    
-            $this.find('.valor').data('original', originalValue);
             let totalBonoPorTrabajador = bonoValue * cantidadTrabajadores;
             let nuevoValor = originalValue + totalBonoPorTrabajador;
     
@@ -366,17 +389,32 @@ $(document).ready(function() {
         $("#totalManoObra").val(0); 
         $('#applyBonoButton').prop('disabled', true);
         $('#removeBonoButton').prop('disabled', false);
-    
         // Deshabilita todos los campos de "cantidad cargo"
         $('.input-group input:first-child').prop('disabled', true);
+        seleccionarBono = true;
     }
-    
-
     function inicializar() {
         obtenerBonos();
         $('#removeBonoButton').prop('disabled', true);
-    }
+        
+        // Añadiendo listener para el select field
+        $('#bono').on('change', function() {
+            verificarBonoSeleccionado();
+        });
 
+        verificarBonoSeleccionado();
+    }
+    function verificarBonoSeleccionado() {
+        let bonoSeleccionado = $('#bono').val();
+        
+        if (bonoSeleccionado === 'No_bono') {
+            $('#applyBonoButton').prop('disabled', true);
+            $('#removeBonoButton').prop('disabled', true);
+        } else {
+            $('#applyBonoButton').prop('disabled', false);
+            $('#removeBonoButton').prop('disabled', true);
+        }
+    }
     // Event listener para "applyBonoButton"
     $('#applyBonoButton').on('click', function() {
         const button = $(this);
@@ -386,33 +424,36 @@ $(document).ready(function() {
         setTimeout(function() {
             aplicarBono(); // Aplicamos el bono
             showNotification("Bono aplicado con éxito!"); // Mostramos la notificación
+            toggleSelect();
             toggleButtonLoading(button, false); // Ocultamos el spinner
         }, 800);
     });
-
     // Llamada a la función de inicialización
     inicializar();
     
     function removerBono() {
         $('.input-group').each(function() {
             let $this = $(this);
-            
-            // Establecer todos los campos de valores a 0
-            $this.find('.valor').val(0);
-            $this.find('.cargo').val(0);
+            // Restablecer los campos de valores a su valor original si está disponible, de lo contrario a 0
+            let originalValue = $this.find('.valor').data('original');
+            if (originalValue !== undefined) {
+                $this.find('.valor').val(originalValue);
+            } else {
+                $this.find('.valor').val(0);
+            }
+            // Eliminar la data original para que pueda ser establecida nuevamente al aplicar un nuevo bono
+            $this.find('.valor').removeData('original');
         });
-    
         // Establecer el total de mano de obra a 0
         $("#totalManoObra").val(0);
-        $("#totalTrabajadores").val(0);
-        $("#totalHoras").val(0);
+        // $("#totalTrabajadores").val(0);
+        // $("#totalHoras").val(0);
         $('.input-group input:first-child').prop('disabled', false);
         // Deshabilita el botón "remove" y habilita el botón "apply"
         $('#removeBonoButton').prop('disabled', true);
         $('#applyBonoButton').prop('disabled', false);
+        seleccionarBono = false;
     }
-    
-
      // Event listener para "removeBonoButton"
     $('#removeBonoButton').on('click', function() {
         const button = $(this);
@@ -422,19 +463,52 @@ $(document).ready(function() {
         setTimeout(function() {
             removerBono(); // Llamamos a la función para remover el bono
             showNotification("Bono removido con éxito!");
+            toggleSelect();
             toggleButtonLoading(button, false);
         }, 800);
     });
 
+
+    function toggleSelect() {
+        if(seleccionarBono) {
+            $('#bono').attr('disabled', 'disabled');
+        } else {
+            $('#bono').removeAttr('disabled');
+        }
+    }
     // Llamada a la función de inicialización
     inicializar();
 
 });
 
 $(document).ready(function() {
+    $(document).ready(function(){
+        $("#ingresoForm").submit(function(e){
+            e.preventDefault();
+    
+            $.ajax({
+                url: '../funciones/ingresar/insertIngreso.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if(response.success) {
+                        alert("Registro ingresado exitosamente!");
+                        location.reload();
+                    } else {
+                        alert(response.error);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error en la petición: " + textStatus + " " + errorThrown);
+                }
+            });
+        });
+    });
+
     // Obtener vehículos
     $.ajax({
-        url: '../funciones/getVehiculos.php',
+        url: '../funciones/ingresar/getVehiculos.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -452,7 +526,7 @@ $(document).ready(function() {
                     if (vehiculo.nombre && vehiculo.id) {
                         let option = $("<option>")
                             .text(vehiculo.nombre)
-                            .val(vehiculo.id)
+                            .val(vehiculo.nombre)
                             .data('preciocombustible', vehiculo.preciocombustible);
                         $currentSelect.append(option);
                     }
@@ -480,7 +554,7 @@ $(document).ready(function() {
 
     // Obtener insumos
     $.ajax({
-        url: '../funciones/getInsumos.php',
+        url: '../funciones/ingresar/getInsumos.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -565,7 +639,7 @@ $(document).ready(function() {
             total += cantidad * precio;
         }
 
-        $('#totalGastosInsumos').val(total.toFixed(2));
+        $('#totalGastosInsumos').val(total);
     }
 
     // Agregar eventos de cambio a los campos de trabajadores
@@ -588,29 +662,7 @@ $(document).ready(function() {
     }
     
     
+    
 });
 
-$(document).ready(function() {
 
-    function actualizarCostoTotal() {
-        let sumaTotal = 0;
-        
-        // Recorremos cada input con la clase "subTotal"
-        $('.subTotal').each(function() {
-            // Sumamos su valor al total, usando "|| 0" por si el valor es NaN
-            sumaTotal += Number($(this).val()) || 0;
-        });
-
-        // Establecemos el valor calculado en el input "costoTotal"
-        $('#costoTotal').val(sumaTotal);
-    }
-
-    // Asignamos el evento "change" a todos los inputs con la clase "subTotal"
-    $('.subTotal').on('change', function() {
-        actualizarCostoTotal();
-    });
-
-    // Llamamos a la función inicialmente por si hay valores preestablecidos en los inputs
-    actualizarCostoTotal();
-
-});
