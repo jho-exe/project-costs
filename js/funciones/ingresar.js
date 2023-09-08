@@ -561,31 +561,35 @@ $(document).ready(function() {
             for (let selectIndex = 1; selectIndex <= 9; selectIndex++) {
                 let $currentSelect = $("#insumo" + selectIndex);
                 let $currentPrecio = $("#precio" + selectIndex);
-
+    
                 $currentSelect.empty();
                 $currentSelect.append($('<option>', {
                     value: 'NO',
-                    text: '- Selecciona insumo -'
+                    text: 'NO'
                 }));
-
+    
                 data.forEach(insumo => {
                     if (insumo.nombre && insumo.id) {
                         let option = $("<option>")
                             .text(insumo.nombre)
-                            .val(insumo.id)
+                            .val(insumo.nombre)
                             .data('precio', insumo.precio);
                         $currentSelect.append(option);
                     }
                 });
-
+    
                 $currentSelect.on('change', function() {
                     let selectedOption = $(this).find('option:selected');
                     let precio = selectedOption.data('precio') || 0;
                     $currentPrecio.val(precio);
                 });
-
+    
+                $currentSelect.on('select2:clear', function() {
+                    $(this).val('NO').trigger('change');
+                });
+    
                 $currentSelect.select2({
-                    placeholder: "- Selecciona insumo -",
+                    placeholder: "NO",
                     allowClear: true
                 });
             }
@@ -594,6 +598,7 @@ $(document).ready(function() {
             console.error("Error al obtener los insumos.", error);
         }
     }); 
+    
 
     // Agregar el evento 'input' a los campos de cantidad
     $('[id^=cantidad]').on('input', function() {

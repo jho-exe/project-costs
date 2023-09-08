@@ -29,16 +29,16 @@
                 <div class="column">
                     <h3>Información General</h3>
                     <label for="numOP">N° OP:</label>
-                    <input type="text" id="numOP" name="numOP" placeholder="Ingrese N° OP" required>
+                    <input type="text" id="numOP" name="numOP" placeholder="Ingrese N° OP" value="0" required>
 
                     <label for="fechaInicio">Fecha Inicio:</label>
-                    <input type="date" id="fechaInicio" name="fechaInicio" placeholder="dd/mm/aaaa">
+                    <input type="date" id="fechaInicio" name="fechaInicio" placeholder="dd/mm/aaaa" value="0000-00-00">
                     
                     <label for="fechaTermino">Fecha Término:</label>
-                    <input type="date" id="fechaTermino" name="fechaTermino" placeholder="dd/mm/aaaa">
+                    <input type="date" id="fechaTermino" name="fechaTermino" placeholder="dd/mm/aaaa" value="0000-00-00">
                     
                     <label for="numVenta">N° N. Venta:</label>
-                    <input type="text" id="numVenta" name="numVenta" placeholder="Ingrese N° N. Venta">
+                    <input type="text" id="numVenta" name="numVenta" value="0" placeholder="Ingrese N° N. Venta">
                     
                     <label for="">RUT Empresa:</label>
                     <input type="text" id="rutEmpresa" name="rutEmpresa" placeholder="Ej: 12345678-9">
@@ -208,47 +208,47 @@
                         <div class="insumo">
                             <select class="select-insumo" id="insumo1" name="insumo1"></select>
                             <input type="number" class="precio" id="precio1" name="precio1" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad1" name="cantidad1" placeholder="Cant.">
+                            <input type="number" class="cantidad" id="cantidad1" name="cantidad1" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo2" name="insumo2"></select>
                             <input type="number" class="precio" id="precio2" name="precio2" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad2" name="cantidad2" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad2" name="cantidad2" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo3" name="insumo3"></select>
                             <input type="number" class="precio" id="precio3" name="precio3" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad3" name="cantidad3" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad3" name="cantidad3" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo4" name="insumo4"></select>
                             <input type="number" class="precio" id="precio4" name="precio4" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad4" name="cantidad4" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad4" name="cantidad4" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo5" name="insumo5"></select>
                             <input type="number" class="precio" id="precio5" name="precio5" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad5" name="cantidad5" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad5" name="cantidad5" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo6" name="insumo6"></select>
                             <input type="number" class="precio" id="precio6" name="precio6" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad6" name="cantidad6" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad6" name="cantidad6" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo7" name="insumo7"></select>
                             <input type="number" class="precio" id="precio7" name="precio7" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad7" name="cantidad7" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad7" name="cantidad7" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo8" name="insumo8"></select>
                             <input type="number" class="precio" id="precio8" name="precio8" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad8" name="cantidad8" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad8" name="cantidad8" value="0" placeholder="0" disabled>
                         </div>
                         <div class="insumo">
                             <select class="select-insumo" id="insumo9" name="insumo9"></select>
                             <input type="number" class="precio" id="precio9" name="precio9" value="0" placeholder="0" readonly>
-                            <input type="number" class="cantidad" id="cantidad9" name="cantidad9" placeholder="Cant." disabled>
+                            <input type="number" class="cantidad" id="cantidad9" name="cantidad9" value="0" placeholder="0" disabled>
                         </div>
                         <!-- Aquí se añade el campo de Total Gastos Insumos -->
                             <label for="totalGastosInsumos">Total Gastos Insumos:</label>
@@ -273,8 +273,8 @@
                         <label for="totalLogistica">Total Logística:</label>
                         <input type="number" id="totalLogistica" name="totalLogistica" value="0" class="subTotal" placeholder="Ej: 20000" readonly>
                     </div>
-                    <input type="hidden" name="fecha_modificacion" value="">
-                    <input type="hidden" name="fecha_eliminacion" value="">
+                    <input type="hidden" id="fecha_modificacion" name="fecha_modificacion" value="">
+                    <input type="hidden" id="fecha_eliminacion" name="fecha_eliminacion" value="">
                 </div>
             </section>
             <section id="costo">
