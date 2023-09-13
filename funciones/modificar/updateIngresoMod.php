@@ -2,6 +2,7 @@
 include '../../includes/db_connection.php';
 
 $response = array();
+date_default_timezone_set('America/Santiago');
 
 try {
     if(isset($_POST['numOP'])) {
@@ -76,7 +77,7 @@ try {
         $varios = $_POST['varios'];
         $totalLogistica = $_POST['totalLogistica'];
         $costoTotal = $_POST['costoTotal'];
-        $fecha_modificacion = $_POST['fecha_modificacion'];
+        $fecha_modificacion = date('Y-m-d H:i:s');
         $fecha_eliminacion = $_POST['fecha_eliminacion'];
 
 

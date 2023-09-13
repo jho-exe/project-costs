@@ -260,6 +260,10 @@ table td .borrar:hover {
 
 }
 
+input[readonly] {
+    background-color: #cccccc ;
+    color: #000000;
+}
 
 .search-container {
     display: flex;

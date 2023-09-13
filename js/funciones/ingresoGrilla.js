@@ -170,6 +170,7 @@ $(document).ready(function(){
                         items.push("<td>" + val.fecha_modificacion + "</td>");
                         items.push("<td>" + val.fecha_eliminacion + "</td>");
                         items.push("<td>" + val.costoTotal + "</td>");
+                        items.push("<td>" + val.estado + "</td>");
                         items.push("</tr>");
                     });
                     
@@ -195,6 +196,11 @@ $(document).ready(function(){
     $("#exportToExcel").click(function() {
         exportToExcel('ingresosTable', 'ingresos');
     });   
+
+    $('#exportarHistorico').on('click', function() {
+        window.location.href = '../exportar_excel.php'; // Reemplaza con la ruta real de tu script PHP
+    });
+    
     
 });
 

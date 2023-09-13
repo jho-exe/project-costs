@@ -17,13 +17,8 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-// Consulta SQL para obtener los datos de la tabla costos
-$consulta = "SELECT p.*, GROUP_CONCAT(t.nombre SEPARATOR ', ') AS trabajadores
-FROM costos p
-LEFT JOIN trabajadores t ON p.id_costo = t.id_costo
-WHERE p.estado = 0
-GROUP BY p.id_costo
-ORDER BY p.id_costo;";
+// Consulta SQL para obtener los datos de la tabla ingreso
+$consulta = "SELECT * FROM ingreso";
 $resultados = $conexion->query($consulta);
 
 // Crear un nuevo objeto Spreadsheet
@@ -32,7 +27,7 @@ $sheet = $spreadsheet->getActiveSheet();
 
 // Definir el título y las celdas combinadas
 $titulo = 'Reporte de Costos';
-$sheet->mergeCells('A1:M1'); // Combinar celdas de A1 a M1 para el título
+$sheet->mergeCells('A1:AT1'); // Combinar celdas de A1 a AT1 para el título
 $sheet->setCellValue('A1', $titulo); // Establecer el título
 
 // Estilo para el título
@@ -65,7 +60,7 @@ $styleHeader = [
     ],
 ];
 
-$sheet->getStyle('A2:M2')->applyFromArray($styleHeader);
+$sheet->getStyle('A2:BU2')->applyFromArray($styleHeader);
 
 // Aplicar borde a toda la tabla
 $highestRow = $sheet->getHighestRow();
@@ -80,10 +75,23 @@ $sheet->getStyle('A2:' . $highestColumn . $highestRow)->applyFromArray([
 ]);
 
 // Encabezados
-$encabezados = ['ID Costos', 'Nombre del Proyecto', 'Descripción', 'Costo', 'Cliente', 'Fecha de Inicio', 'Duración', 'Categoría', 'Responsable', 'Ubicación', 'Observaciones', 'Estado', 'Trabajadores'];
+$encabezados = [
+    'ID', 'numOP', 'Fecha Inicio', 'Fecha Término', 'Número de Venta', 'RUT Empresa', 'Nombre Empresa',
+    'Servicio', 'Bono', 'Supervisor', 'Valor Supervisor', 'APR', 'Valor APR', 'M1', 'Valor M1',
+    'M2', 'Valor M2', 'Mecánico', 'Valor Mecánico', 'Ayudante', 'Valor Ayudante', 'Total Trabajadores',
+    'Total Mano de Obra', 'Taller/Terreno', 'Duración Servicio', 'Total Horas', 'Vehículo 1', 'Combustible 1',
+    'Vehículo 2', 'Combustible 2', 'Vehículo 3', 'Combustible 3', 'Total Kilómetros', 'Total Peajes',
+    'Total Combustible', 'Total Gastos Vehículos', 'Observaciones', 'Insumo 1', 'Precio 1', 'Cantidad 1',
+    'Insumo 2', 'Precio 2', 'Cantidad 2', 'Insumo 3', 'Precio 3', 'Cantidad 3', 'Insumo 4', 'Precio 4',
+    'Cantidad 4', 'Insumo 5', 'Precio 5', 'Cantidad 5', 'Insumo 6', 'Precio 6', 'Cantidad 6', 'Insumo 7',
+    'Precio 7', 'Cantidad 7', 'Insumo 8', 'Precio 8', 'Cantidad 8', 'Insumo 9', 'Precio 9', 'Cantidad 9',
+    'Total Gastos Insumos', 'Alojamientos', 'Alimentación', 'Varios', 'Total Logística', 'Costo Total',
+    'Fecha Modificación', 'Fecha Eliminación', 'Estado'
+];
+
 $columna = 'A';
 foreach ($encabezados as $encabezado) {
-    $sheet->setCellValue($columna . '2', $encabezado); // Cambiado a '2' para la fila de encabezados
+    $sheet->setCellValue($columna . '2', $encabezado);
     $columna++;
 }
 
@@ -123,7 +131,7 @@ while ($fila = $resultados->fetch_assoc()) {
 
 // Crear el archivo Excel
 $writer = new Xlsx($spreadsheet);
-$filename = 'Tabla_Costos.xlsx';
+$filename = 'IngresosHistoricos.xlsx';
 
 // Enviar el archivo Excel al navegador
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

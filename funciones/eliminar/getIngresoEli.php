@@ -7,7 +7,7 @@ if(isset($_GET['numOP'])) {
     $numOP = $_GET['numOP'];
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM ingreso WHERE numOP = :numOP AND estado = 'Activo'");
+        $stmt = $conn->prepare("SELECT * FROM ingreso WHERE numOP = :numOP");
         $stmt->bindParam(':numOP', $numOP);
         
         if($stmt->execute()) {

@@ -78,6 +78,12 @@ $(document).ready(function() {
                 $("#precio").val(insumo.precio);
 
                 $("#insumoId").val(insumo.id);
+
+                // Mueve el foco al campo #RUT y desplaza la página hasta esa posición
+                $("#nombre").focus();
+                
+                var nombrePosition = $("#nombre")[0].getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({top: nombrePosition, behavior: 'smooth'});
             } else {
                 alert(data.message);
             }

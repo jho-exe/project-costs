@@ -290,6 +290,28 @@ table td .borrar:hover {
     border: 2px solid #4CAF50; /* Borde al hacer hover */
 }
 
+#exportarHistorico {
+    background-color: #1A5276; /* Azul Oscuro */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s; /* Efecto de transición */
+    cursor: pointer;
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Sombras */
+}
+
+#exportarHistorico:hover {
+    background-color: white;
+    color: #1A5276; /* El mismo tono de azul para el texto al hacer hover */
+    border: 2px solid #1A5276; /* Borde al hacer hover */
+}
+
+
 /* Responsive design */
 @media only screen and (max-width: 768px) {
     .mantenedor {

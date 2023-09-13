@@ -1,5 +1,5 @@
 function cargarVehiculos() {
-    $.getJSON("../funciones/modificar/getVehiculos.php", function(response) {
+    $.getJSON("../funciones/eliminar/getVehiculos.php", function(response) {
         if (response.data) {
             var vehiculos = response.data.vehiculos;
             
@@ -9,7 +9,7 @@ function cargarVehiculos() {
                 $('#vehiculo2').append(option.clone());
                 $('#vehiculo3').append(option.clone());
             });
-
+            
         } else {
             console.error(response.error);
         }
@@ -19,7 +19,7 @@ function cargarVehiculos() {
 }
 
 function cargarInsumos() {
-    $.getJSON("../funciones/modificar/getInsumos.php", function(response) {
+    $.getJSON("../funciones/eliminar/getInsumos.php", function(response) {
         if (response.data) {
             var insumos = response.data.insumos;
 
@@ -64,14 +64,8 @@ $(document).ready(function() {
                     
                     // Validación para el campo 'bono'
                     var bonoValue = response.data.bono;
-                    if (!bonoValue) {
+                    if(!bonoValue) {
                         bonoValue = "No_bono";
-                        $('#applyBonoButton').prop('disabled', true);
-                        $('#removeBonoButton').prop('disabled', true);
-                    } else {
-                        $('#applyBonoButton').prop('disabled', true);
-                        // Si el bonoValue es distinto de "No_bono", deshabilitar el botón #removeBonoButton
-                        $('#removeBonoButton').prop('disabled', false);
                     }
                     $('#bono').val(bonoValue); 
                     $('#supervisor').val(response.data.supervisor);
@@ -157,53 +151,46 @@ $(document).ready(function() {
         }
     });
 
-    $("#modificarForm").submit(function(event) {
-        event.preventDefault();
+    $('.button-eliminar').on('click', function(event){
+            event.preventDefault();
     
-        var numOP = $("#numOP").val(); 
-        console.log("Valor cantidad4: ", $("#cantidad4").val());
-        console.log("Valor cantidad9: ", $("#cantidad9").val());
-        // Habilita los campos antes de serializar el formulario
-        $("#numOp, #cantidad1, #cantidad2, #cantidad3, #cantidad4, #cantidad5, #cantidad6, #cantidad7, #cantidad8, #cantidad9").prop('disabled', false);
+            var numOP = $("#numOP").val(); // Asumiendo que tienes un input con ID 'numOP' que contiene el número de operación
+            if(!numOP) {
+                alert("Número de operación (numOP) no especificado");
+                return;
+            }
     
-        console.log("Número de OP antes de enviar: ", numOP);
-    
-        if (numOP && numOP !== "") {
-            var formData = $(this).serialize();
-            formData += "&numOP=" + numOP;
-    
-            console.log("Datos del formulario: ", formData);
-    
-            $.post("../funciones/modificar/updateIngresoMod.php", formData)
-            .done(function(data) {
-                console.log(data);
-                try {
-                    if (data.startsWith('<')) {
-                        throw new Error('Respuesta no válida del servidor');
+            var fechaEliminacion = $('#fecha_eliminacion').val();
+            
+            if(confirm("¿Estás seguro de que quieres eliminar este registro?")){
+                $.ajax({
+                    url: '../funciones/eliminar/updateIngresoEli.php', // Cambia esto a la ruta de tu archivo PHP
+                    type: 'POST',
+                    data: {
+                        numOP: numOP,
+                        fecha_eliminacion: fechaEliminacion
+                    },
+                    success: function(response) {
+                        try {
+                            var jsonResponse = JSON.parse(response);
+                            if(jsonResponse.success) {
+                                alert("Registro eliminado exitosamente");
+                                location.reload();
+                                // Aquí puedes agregar código para eliminar el registro del DOM o redirigir a otra página, etc.
+                            } else {
+                                alert("Error al eliminar el registro: " + jsonResponse.message);
+                            }
+                        } catch (e) {
+                            console.error("Error al parsear la respuesta:", e);
+                            alert("Ocurrió un error inesperado.");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert("Error al comunicarse con el servidor: " + errorThrown);
                     }
-            
-                    var jsonData = JSON.parse(data);
-            
-                    if(jsonData.success) {
-                        alert("Registro modificado exitosamente!");
-                        location.reload();
-                    } else {
-                        alert(jsonData.message || "Error al actualizar el ingreso.");
-                    }
-                } catch (e) {
-                    console.error("Error al parsear la respuesta:", e);
-                    alert("Ocurrió un error inesperado.");
-                }
-            })
-            
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                alert("Error al comunicarse con el servidor: " + errorThrown);
-            });
-        } else {
-            alert("El número de operación no puede estar vacío."); 
-        }
+                });
+            }
     });
-    
     
 });
 
@@ -550,157 +537,16 @@ $(document).ready(function() {
         // Actualiza el campo totalGastoVehiculo con el total general
         $('#totalGastosVehiculos').val(totalGeneral);
     }        
-
-    $('#actualizarTotalBtn').on('click', function() {
-        const button = $(this);
-
-        toggleButtonLoading(button, true);
-
-        setTimeout(function() {
-            actualizarTotalCombustible();  // Ahora, se ejecuta la función para calcular el combustible
-            actualizarTotalPeajes();
-            calcularTotalGeneral();
-            showNotification("Gastos vehiculos calculado con éxito!");
-            toggleButtonLoading(button, false);
-        }, 2000); 
-    });
-
-    let bonos = [];
-    let seleccionarBono = [];
-
-    function obtenerBonos() {
-        $.get('../funciones/ingresar/getBonos.php', function(data) {
-            bonos = data;
-        });
-    }
-
-    function aplicarBono() {
-        let bonoSeleccionado = $('#bono').val();
-        $('.input-group').each(function() {
-            let $this = $(this);
-            let cantidadTrabajadores = parseFloat($this.find('input:first-child').val());
     
-            // Si la cantidad de trabajadores es 0, establece el valor en 0 y continúa con la próxima iteración
-            if (cantidadTrabajadores === 0) {
-                $this.find('.valor').val(0);
-                return true; // equivalente a 'continue' en un bucle normal
-            }
-            let cargoLabel = $this.prev('label').text().replace(':', '').trim();
-            let bonoValue = 0;
-    
-            for (let i = 0; i < bonos.length; i++) {
-                if (bonos[i].cargo.toLowerCase() === cargoLabel.toLowerCase()) {
-                    bonoValue = parseFloat(bonos[i][bonoSeleccionado]);
-                    break;
-                }
-            }
-            // Comprueba si el data-original existe antes de sobrescribirlo, para preservar el valor original
-            if ($this.find('.valor').data('original') === undefined) {
-                $this.find('.valor').data('original', parseFloat($this.find('.valor').val()));
-            }
-            let originalValue = parseFloat($this.find('.valor').data('original'));
-    
-            let totalBonoPorTrabajador = bonoValue * cantidadTrabajadores;
-            let nuevoValor = originalValue + totalBonoPorTrabajador;
-    
-            $this.find('.valor').val(nuevoValor.toFixed(2));
-        });
-        $("#totalManoObra").val(0); 
-        $('#applyBonoButton').prop('disabled', true);
-        $('#removeBonoButton').prop('disabled', false);
-        // Deshabilita todos los campos de "cantidad cargo"
-        $('.input-group input:first-child').prop('disabled', true);
-        seleccionarBono = true;
-    }
-    function inicializar() {
-        obtenerBonos();
-        $('#removeBonoButton').prop('disabled', true);
-        
-        // Añadiendo listener para el select field
-        $('#bono').on('change', function() {
-            verificarBonoSeleccionado();
-        });
-
-        verificarBonoSeleccionado();
-    }
-    function verificarBonoSeleccionado() {
-        let bonoSeleccionado = $('#bono').val();
-        
-        if (bonoSeleccionado === 'No_bono') {
-            $('#applyBonoButton').prop('disabled', true);
-            $('#removeBonoButton').prop('disabled', true);
-        } else {
-            $('#applyBonoButton').prop('disabled', false);
-            $('#removeBonoButton').prop('disabled', true);
-        }
-    }
-    // Event listener para "applyBonoButton"
-    $('#applyBonoButton').on('click', function() {
-        const button = $(this);
-    
-        toggleButtonLoading(button, true);
-    
-        setTimeout(function() {
-            aplicarBono(); // Aplicamos el bono
-            showNotification("Bono aplicado con éxito!"); // Mostramos la notificación
-            toggleSelect();
-            toggleButtonLoading(button, false); // Ocultamos el spinner
-        }, 800);
-    });
-    // Llamada a la función de inicialización
-    inicializar();
-    
-    function removerBono() {
-        $('.input-group').each(function() {
-            let $this = $(this);
-            // Restablecer los campos de valores a su valor original si está disponible, de lo contrario a 0
-            let originalValue = $this.find('.valor').data('original');
-            if (originalValue !== undefined) {
-                $this.find('.valor').val(originalValue);
-            } else {
-                $this.find('.valor').val(0);
-            }
-            // Eliminar la data original para que pueda ser establecida nuevamente al aplicar un nuevo bono
-            $this.find('.valor').removeData('original');
-        });
-        // Establecer el total de mano de obra a 0
-        $("#totalManoObra").val(0);
-        // $("#totalTrabajadores").val(0);
-        // $("#totalHoras").val(0);
-        $('.input-group input:first-child').prop('disabled', false);
-        // Deshabilita el botón "remove" y habilita el botón "apply"
-        $('#removeBonoButton').prop('disabled', true);
-        $('#applyBonoButton').prop('disabled', false);
-        seleccionarBono = false;
-    }
-     // Event listener para "removeBonoButton"
-    $('#removeBonoButton').on('click', function() {
-        const button = $(this);
-
-        toggleButtonLoading(button, true);
-        setTimeout(function() {
-            removerBono(); // Llamamos a la función para remover el bono
-            showNotification("Bono removido con éxito!");
-            toggleSelect();
-            toggleButtonLoading(button, false);
-        }, 800);
-    });
-
-    function toggleSelect() {
-        if(seleccionarBono) {
-            $('#bono').attr('disabled', 'disabled');
-        } else {
-            $('#bono').removeAttr('disabled');
-        }
-    }
     // Llamada a la función de inicialización
     inicializar();
 });
 
 $(document).ready(function() {
+
     // Obtener vehículos
     $.ajax({
-        url: '../funciones/modificar/getVehiculos.php',
+        url: '../funciones/ingresar/getVehiculos.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -746,7 +592,7 @@ $(document).ready(function() {
 
     // Obtener insumos
     $.ajax({
-        url: '../funciones/modificar/getInsumos.php',
+        url: '../funciones/ingresar/getInsumos.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -856,6 +702,8 @@ $(document).ready(function() {
 
         $('#totalTrabajadores').val(totalTrabajadores);
     }
+    
+    
     
 });
 

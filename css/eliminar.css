@@ -1,0 +1,689 @@
+:root {
+    --primary-color: #009688;
+    --primary-color-dark: #00796b;
+    --input-border-color: #ccc;
+    --input-focus-border-color: var(--primary-color);
+    --label-color: #666;
+    --heading-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color-dark: rgba(0, 0, 0, 0.4);
+    --column-color: #f5f5f5;
+    --column-hover-color: #e8e8e8;
+    --font-family-modern: "Poppins", sans-serif;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: var(--font-family-modern);
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1.2fr 1fr; /* Esto ajusta el ancho de las columnas */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+label[for="servicio"] {
+    font-size: 0.9rem; /* Aquí disminuye el tamaño de fuente. Puedes ajustar el valor según prefieras. */
+}
+
+#servicio {
+    width: 95%; /* Ajusta el ancho del textarea. Puedes cambiar este valor según prefieras. */
+    height: 100px; /* Ajusta la altura del textarea. Puedes cambiar este valor según prefieras. */
+}
+
+
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--shadow-color);
+}
+
+.title, .logistica {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: var(--heading-color);
+}
+
+h2, h3 {
+    margin-top: 20px;
+    color: var(--primary-color);
+}
+
+.column h3 {
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    color: var(--label-color);
+    display: inline-block;   /* Cambio hecho aquí */
+    margin-top: 10px;
+}
+
+
+input[type="text"], input[type="number"], input[type="date"] {
+    width: 93%;
+    padding: 8px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 3px;
+    transition: border-color 0.3s;
+}
+
+input[readonly] {
+    background-color: #cccccc ;
+    color: #000000;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+    border-color: var(--input-focus-border-color);
+}
+
+select {
+    width: 97%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.column {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px var(--shadow-color-dark);
+    transition: transform 0.3s ease-out;
+}
+
+
+.insumo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.insumo select {
+    flex: 1;
+}
+
+.insumo input {
+    flex: 0.4;
+}
+
+.vehiculos {
+    display: flex;
+    align-items: center;
+    margin-bottom: 9px;
+    justify-content: space-between;
+}
+
+.vehiculos select {
+    flex: 1;
+    max-width: 200px;
+    margin: 0;         /* Eliminar márgenes */
+    padding: 0;        /* Reducir padding */
+    box-sizing: border-box;  /* Asegurarte de que el padding y el borde no sumen al ancho total */
+}
+
+.vehiculos input {
+    flex: 0.5;
+    max-width: 100px;
+}
+
+.alojamientoAlimentacion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.alojamientoAlimentacion label,
+.alojamientoAlimentacion input {
+    margin: 0 10px; 
+}
+
+/* Definiendo un ancho específico para los campos de entrada */
+.alojamientoAlimentacion input {
+    width: 60px; /* Puedes ajustar este valor según tus necesidades */
+    padding: 4px; /* Añadido para mejorar la experiencia del usuario */
+    border: 1px solid #ccc; /* Añadido para visualizar claramente el campo de entrada */
+}
+
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.logistica label, .logistica input {
+    margin-top: 5px;
+}
+
+.logistica input[type="number"] {
+    width: 70px;
+}
+
+/* .total, .input-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+} */
+
+
+/* Oculta las flechas en navegadores basados en Webkit (Chrome, Safari, etc.) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Oculta las flechas en Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Estilos ya existentes */
+.totals-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 10px;
+}
+
+/* Nuevo estilo para agregar margen derecho al campo "Total Combustible" */
+.total-item:nth-child(2) {
+    margin-right: 10px; /* Ajusta el valor de margen según tus necesidades */
+}
+
+#actualizarTotalBtn {
+    background-color: var(--primary-color);; /* Color de fondo */
+    color: #ffffff;           /* Color del texto */
+    border: none;             /* Elimina el borde predeterminado */
+    padding: 10px 20px;       /* Relleno alrededor del texto */
+    font-size: 16px;          /* Tamaño del texto */
+    border-radius: 4px;       /* Esquinas redondeadas */
+    cursor: pointer;          /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s; /* Efecto suave al cambiar el color de fondo */
+    width: 300px;             /* Ancho del botón */
+}
+
+#actualizarTotalBtn:hover {
+    background-color: var(--primary-color-dark); /* Color de fondo al pasar el mouse por encima */
+}
+
+
+
+.total-item {
+    display: flex;            /* Usa flexbox */
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;      /* Centra verticalmente */
+    height: 10%;             /* Asume todo el espacio vertical disponible, puedes ajustarlo según lo necesites */
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Para los campos "cargo" */
+.input-group .valor{
+    width: 25%;
+    margin-right: 10px; /* Espacio entre las entradas */
+    margin-left: 10px;
+}
+.element-container {
+    width: 100%;
+}
+
+.inline-elements {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.margen-derecho {
+    margin-right: 10px;  /* Ajusta el valor según lo necesario */
+    margin-left: 5px;
+}
+
+.bonoTurno {
+    display: flex;
+    align-items: center; /* Alinea verticalmente en el centro el contenido */
+}
+
+.bonoTurno label {
+    margin-right: 5px; /* Ajusta el espacio entre el label y el select */
+
+}
+
+.bonoTurno select {
+    width: 53%; /* Puedes ajustar este valor a tu necesidad */
+}
+
+/* .subTotal {
+    background-color: #ccffcc !important;  
+}
+
+.Total {
+    background-color: #ffff99 !important;  
+} */
+
+/* Estilos para el contenedor de botones */
+.container-de-los-botones {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+/* Estilos para los botones */
+.container-de-los-botones button {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.container-de-los-botones button:hover {
+    background-color: #f5f5f5;
+}
+
+.bonoTurno {
+    margin-bottom: 10px; /* Espacio entre el selector de bono y los botones */
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los dos botones */
+}
+
+.buttons-container button {
+    width: 110px; /* Define un ancho específico para los botones */
+    margin: 0 2px;
+    padding: 1px 15px;  
+    border: none;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#calculateButton, #applyBonoButton, #removeBonoButton {
+    box-sizing: border-box;
+    margin: 0 5px;
+    padding: 10px 20px;
+    height: 30px;
+    flex: 1;  /* Todos los botones tienen la misma proporción base */
+}
+
+#calculateButton {
+    background-color: var(--primary-color);;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    height: 35px;
+    transition: background-color 0.3s;
+}
+
+#calculateButton:hover {
+    background-color: var(--primary-color-dark);;
+}
+
+#applyBonoButton {
+    background-color: var(--primary-color);;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    height: 35px;
+    transition: background-color 0.3s;
+}
+
+#applyBonoButton:hover {
+    background-color: var(--primary-color-dark);;
+}
+
+#removeBonoButton {
+    background-color: red;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    height: 35px;
+    transition: background-color 0.3s;
+}
+
+#removeBonoButton:hover {
+    background-color: #8B0000;
+}
+
+.box-wrapper {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0; /* Cambia este color a uno más oscuro si lo deseas */
+}
+
+textarea {
+    resize: none;
+}
+
+#calculateButton[disabled], #applyBonoButton[disabled], #removeBonoButton[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none; /* Deshabilita completamente cualquier evento de ratón en el botón */
+}
+
+#calculateButton[disabled]:hover, 
+#applyBonoButton[disabled]:hover, 
+#removeBonoButton[disabled]:hover {
+    background-color: inherit; /* Asegura que no haya cambio de color en el hover */
+}
+
+.notification-popup {
+    position: fixed;
+    bottom: -100px; /* inicialmente oculto */
+    right: 10px; 
+    background-color: #4CAF50; /* color de fondo verde para éxito */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: bottom 0.3s ease-out;
+    z-index: 1000; /* para asegurarse de que esté encima de otros elementos */
+    max-width: 300px; /* limitar el ancho */
+    text-align: center; /* centrar el texto */
+}
+
+.notification-popup.error {
+    background-color: #f44336; /* color de fondo rojo para errores */
+}
+
+/* Estilo general para el spinner de carga */
+.spinner {
+    display: none;  /* Inicialmente no se muestra */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 2px solid white; 
+    width: 14px;
+    height: 14px;
+    animation: spin 1s linear infinite;
+    margin-right: 5px; /* Espacio entre el spinner y el texto del botón */
+    vertical-align: middle; /* Alinear verticalmente con el texto del botón */
+}
+
+/* Animación para hacer girar el spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilo del botón cuando está cargando */
+.button-loading {
+    position: relative; /* Permitir posicionamiento absoluto para los hijos */
+    padding-left: 25px; /* Espacio para el spinner */
+}
+
+.button-loading .spinner {
+    display: inline-block; /* Mostrar el spinner */
+}
+
+.button-loading span:not(.spinner) {
+    display: none;
+}
+
+.title-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos al centro */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    background-color: #f8f9fa  ; /* Color de fondo */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    margin-bottom: 20px; /* Margen inferior para separarlo de otros elementos */
+}
+
+.op-search-container {
+    display: flex;
+    align-items: space-between;
+}
+
+.op-search-container input {
+    margin-right: 10px;
+}
+
+.searchOP{
+    background-color: var(--primary-color);; /* Color de fondo */
+    color: #ffffff;           /* Color del texto */
+    border: none;             /* Elimina el borde predeterminado */
+    padding: 10px 20px;       /* Relleno alrededor del texto */
+    font-size: 16px;          /* Tamaño del texto */
+    border-radius: 4px;       /* Esquinas redondeadas */
+    cursor: pointer;          /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s; /* Efecto suave al cambiar el color de fondo */
+    width: 300px;  
+}
+
+.searchOP:hover{
+        background-color: var(--primary-color-dark); /* Color de fondo al pasar el mouse por encima */
+}
+
+.title {
+    margin: 0; /* Remueve márgenes por defecto de h1 */
+    color: #333; /* Color del texto */
+    flex-grow: 2; /* Permite que el título tome más espacio */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 1.5em; /* Tamaño del texto */
+    margin-left: 20px;
+}
+
+#costo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.total-costo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-left, .content-right {
+    display: flex;
+    align-items: center;
+}
+
+.content-left {
+    flex-grow: 1;
+}
+
+.content-right {
+    flex-shrink: 0;
+}
+
+.content-left label {
+    margin-right: 10px; /* Añadido margen a la derecha para dar espacio entre el label y el input */
+}
+
+
+.menu-button {
+    cursor: pointer;
+    border: none; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Añadido transform para la transición */
+    background-color: red;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-family: var(--font-family-modern);
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.button-eliminar:hover {
+    background-color: #8B0000 !important;
+}
+
+.button:hover, .menu-button:hover {
+    background-color: var(--primary-color-dark);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.05); /* Añadido un ligero movimiento hacia arriba */
+}
+
+.menu-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    width: 50px;  /* Ancho del botón, haciéndolo circular */
+    height: 50px; /* Altura del botón, haciéndolo circular */
+    border-radius: 50%; /* Hace el botón completamente circular */
+    background-color: var(--primary-color); /* Usa tu color primario */
+    position: relative; /* Se establece como relativo para el pseudoelemento y la animación */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones para efectos hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu-back:before {
+    content: "←";
+    font-size: 24px;
+    transition: transform 0.3s; /* Transición para el movimiento de la flecha */
+    color: #fff; /* Color blanco para el ícono para contrastar con el color primario */
+}
+
+.menu-back:hover:before {
+    transform: translateX(-5px); /* Al hacer hover, la flecha se moverá ligeramente a la izquierda */
+}
+
+.menu-back:hover {
+    transform: scale(1.05); /* Al hacer hover, el botón se agrandará ligeramente */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra más prominente en hover */
+}
+
+/* Animación pulsante */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 150, 136, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 150, 136, 0.5), 0 0 30px rgba(0, 150, 136, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 150, 136, 0.7);
+    }
+}
+
+.menu-back {
+    animation: pulse 1.5s infinite; /* Aplicando la animación pulsante al botón */
+}
+
+@media only screen and (max-width: 992px) {
+    section {
+        grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas medianas */
+    }
+
+    .container {
+        max-width: 90%; /* Ancho reducido para el contenedor en pantallas medianas */
+    }
+
+    /* Ajusta otros estilos según sea necesario */
+}
+
+@media only screen and (max-width: 768px) {
+    section {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+
+    .container {
+        max-width: 100%; /* Ancho completo para el contenedor en pantallas pequeñas */
+    }
+
+    label[for="servicio"] {
+        font-size: 0.8rem; /* Reducción del tamaño de fuente para etiquetas en pantallas pequeñas */
+    }
+
+    #servicio {
+        width: 100%; /* Ancho completo para el textarea en pantallas pequeñas */
+        height: 150px; /* Ajusta la altura del textarea según sea necesario */
+    }
+
+    /* Ajusta otros estilos según sea necesario */
+}
+
+
+@media only screen and (max-width: 480px) {
+    label {
+        font-size: 0.7rem; /* Reducción adicional del tamaño de fuente para etiquetas en pantallas muy pequeñas */
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], select {
+        width: 100%; /* Ancho completo para campos de entrada y select en pantallas muy pequeñas */
+    }
+
+    .vehiculos select, .vehiculos input {
+        max-width: 100%; /* Ancho completo para campos de vehículos en pantallas muy pequeñas */
+    }
+
+    .insumo input, .insumo select {
+        flex: 1; /* Ocupar todo el ancho disponible para campos de insumos en pantallas muy pequeñas */
+    }
+
+    .alojamientoAlimentacion input {
+        width: 50px; /* Ancho más pequeño para campos de alojamiento y alimentación en pantallas muy pequeñas */
+    }
+
+    /* Ajusta otros estilos según sea necesario */
+}
+
+/*  */

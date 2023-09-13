@@ -5,7 +5,7 @@ $response = array();
 
 try {
     // Preparar la consulta para seleccionar todos los registros
-    $stmt = $conn->prepare("SELECT * FROM ingreso");
+    $stmt = $conn->prepare("SELECT * FROM ingreso WHERE estado = 'Activo' ");
     
     // Ejecutar la consulta
     if($stmt->execute()) {

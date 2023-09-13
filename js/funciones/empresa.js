@@ -119,6 +119,12 @@ $(document).ready(function() {
                 $("#Telefonos").val(empresa.Telefonos);
 
                 $("#empresaId").val(empresa.id);
+
+                // Mueve el foco al campo #RUT y desplaza la página hasta esa posición
+                $("#RUT").focus();
+                
+                var rutPosition = $("#RUT")[0].getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({top: rutPosition, behavior: 'smooth'});
             } else {
                 alert(data.message);
             }
@@ -127,6 +133,7 @@ $(document).ready(function() {
             alert("Error al comunicarse con el servidor: " + errorThrown);
         });
     });
+
 
     $("#searchInput").on("keyup", function() {
         let value = $(this).val().toLowerCase();

@@ -40,6 +40,73 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on("click", ".editar", function() {
+        var row = $(this).closest('tr');
+        var cargoId = row.find('td:first').text(); // ID del vehículo en la primera celda de la fila
+    
+        $.getJSON("../funciones/cargo/getCargoById.php", { id: cargoId })
+        .done(function(data) {
+            if (data.success) {
+                var cargo = data.cargo;
+    
+                // Llenar el formulario con los datos del vehículo
+                $("#cargo").val(cargo.cargo);
+                $("#sueldo").val(cargo.sueldo);
+                $("#costohh").val(cargo.costohh);
+                $("#cargo_largo").val(cargo.cargo_largo);
+                $("#B_T_Dia").val(cargo.B_T_Dia);
+                $("#B_T_Noche").val(cargo.B_T_Noche);
+                $("#B_sab_dom_festivo").val(cargo.B_sab_dom_festivo);
+                $("#B_Emergen").val(cargo.B_Emergen);
+                
+                // Actualiza el campo oculto con el ID del cargo
+                $("#cargoId").val(cargo.id);
+            } else {
+                alert(data.message);
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            alert("Error al comunicarse con el servidor: " + errorThrown);
+        });
+    });
+
+    $('#cargoForm').on('submit', function(e){
+        e.preventDefault();
+        
+        var cargoValue = $("[name='cargo']").val();
+    
+        if (cargoValue === "") {
+            alert("El campo cargo está vacío, por favor llénalo antes de enviar.");
+            return;
+        }
+    
+        var formData = $(this).serialize();
+    
+        $.ajax({
+            url: '../funciones/cargo/updateCargo.php', // Asegúrate de reemplazar con la ruta correcta a tu archivo PHP
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                try {
+                    var responseData = JSON.parse(response);
+                    if(responseData.success) {
+                        alert("Cargo actualizado exitosamente!");
+                        $("#cargoForm")[0].reset();
+                        loadCargos();
+                    } else {
+                        alert("Error: " + responseData.message);
+                    }
+                } catch (e) {
+                    alert("Error en la respuesta del servidor.");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error en la solicitud AJAX: " + textStatus);
+            }
+        });
+    });
+    
+
     $(document).on("click", ".borrar", function() {
         var row = $(this).closest('tr');
         var cargoId = row.find('td:first').text();

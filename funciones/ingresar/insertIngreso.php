@@ -7,7 +7,7 @@ $response = array();
 
 try {
     if(isset($_POST['numOP']) && $_POST['numOP'] != '' && $_POST['numOP'] != '0') {
-        
+           
         $fields = [
             'id', 'numOP', 'fechaInicio', 'fechaTermino', 'numVenta', 'rutEmpresa', 'nombreEmpresa', 
             'servicio', 'bono', 'supervisor', 'valorSupervisor', 'apr', 'valorApr', 'm1', 'valorM1', 
@@ -18,12 +18,18 @@ try {
             'cantidad2', 'insumo3', 'precio3', 'cantidad3', 'insumo4', 'precio4', 'cantidad4', 'insumo5', 'precio5', 
             'cantidad5', 'insumo6', 'precio6', 'cantidad6', 'insumo7', 'precio7', 'cantidad7', 'insumo8', 'precio8', 
             'cantidad8', 'insumo9', 'precio9', 'cantidad9', 'totalGastosInsumos', 'alojamientos', 'alimentacion', 
-            'varios', 'totalLogistica','fecha_modificacion', 'fecha_eliminacion', 'costoTotal' 
+            'varios', 'totalLogistica','fecha_modificacion', 'fecha_eliminacion', 'costoTotal'
         ];
         
         $params = [];
         foreach ($fields as $field) {
-            $params[] = $_POST[$field] ?? null;
+            if (isset($_POST[$field])) {
+                $params[] = $_POST[$field] !== '' ? $_POST[$field] : null;
+            } else {
+                $params[] = null;
+            }
+            // Para debuggear, puedes descomentar la siguiente línea:
+            // error_log("Field: $field, Value: " . var_export($params[end(array_keys($params))], true));
         }
 
         $placeholders = rtrim(str_repeat('?, ', count($fields)), ', ');

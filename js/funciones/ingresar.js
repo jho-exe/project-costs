@@ -349,43 +349,61 @@ $(document).ready(function() {
         });
     }
 
-    function obtenerBonos() {
-        $.get('../funciones/ingresar/getBonos.php', function(data) {
-            bonos = data;
+    $("#debugg").click(function() {
+        const campos = [
+         'bono', 'supervisor', 'valorSupervisor', 'apr', 'valorApr', 'm1', 'valorM1',
+            'm2', 'valorM2', 'mecanico', 'valorMecanico', 'ayudante', 'valorAyudante', 'totalTrabajadores',
+        ];
+    
+        campos.forEach(campo => {
+            console.log(`${campo}: `, $("#" + campo).val());
         });
-    }
-
+    });
+    
+    
     function aplicarBono() {
         let bonoSeleccionado = $('#bono').val();
+        console.log("Bono seleccionado: ", bonoSeleccionado);
+    
         $('.input-group').each(function() {
             let $this = $(this);
-            let cantidadTrabajadores = parseFloat($this.find('input:first-child').val());
+        
+            let cargoLabel = $this.prev('label').text().replace(':', '').trim().toLowerCase();
+            let cantidadTrabajadoresInput = $this.find('input:first-child').val();
+
+            let cantidadTrabajadores = parseFloat(cantidadTrabajadoresInput);
     
             // Si la cantidad de trabajadores es 0, establece el valor en 0 y continúa con la próxima iteración
             if (cantidadTrabajadores === 0) {
                 $this.find('.valor').val(0);
                 return true; // equivalente a 'continue' en un bucle normal
             }
-            let cargoLabel = $this.prev('label').text().replace(':', '').trim();
+    
             let bonoValue = 0;
     
             for (let i = 0; i < bonos.length; i++) {
                 if (bonos[i].cargo.toLowerCase() === cargoLabel.toLowerCase()) {
                     bonoValue = parseFloat(bonos[i][bonoSeleccionado]);
+                    console.log("Bono encontrado en el índice ", i, ": ", bonoValue);
                     break;
                 }
             }
+    
             // Comprueba si el data-original existe antes de sobrescribirlo, para preservar el valor original
             if ($this.find('.valor').data('original') === undefined) {
                 $this.find('.valor').data('original', parseFloat($this.find('.valor').val()));
             }
             let originalValue = parseFloat($this.find('.valor').data('original'));
+
     
             let totalBonoPorTrabajador = bonoValue * cantidadTrabajadores;
+
+    
             let nuevoValor = originalValue + totalBonoPorTrabajador;
     
             $this.find('.valor').val(nuevoValor.toFixed(2));
         });
+    
         $("#totalManoObra").val(0); 
         $('#applyBonoButton').prop('disabled', true);
         $('#removeBonoButton').prop('disabled', false);
@@ -393,6 +411,9 @@ $(document).ready(function() {
         $('.input-group input:first-child').prop('disabled', true);
         seleccionarBono = true;
     }
+    
+    
+    
     function inicializar() {
         obtenerBonos();
         $('#removeBonoButton').prop('disabled', true);
@@ -424,12 +445,10 @@ $(document).ready(function() {
         setTimeout(function() {
             aplicarBono(); // Aplicamos el bono
             showNotification("Bono aplicado con éxito!"); // Mostramos la notificación
-            toggleSelect();
+            // toggleSelect();
             toggleButtonLoading(button, false); // Ocultamos el spinner
         }, 800);
     });
-    // Llamada a la función de inicialización
-    inicializar();
     
     function removerBono() {
         $('.input-group').each(function() {
@@ -476,7 +495,7 @@ $(document).ready(function() {
             $('#bono').removeAttr('disabled');
         }
     }
-    // Llamada a la función de inicialización
+    
     inicializar();
 
 });
@@ -485,7 +504,8 @@ $(document).ready(function() {
     $(document).ready(function(){
         $("#ingresoForm").submit(function(e){
             e.preventDefault();
-    
+            $("#supervisor, #apr, #m1, #m2, #mecanico, #ayudante, #cantidad1, #cantidad2, #cantidad3, #cantidad4, #cantidad5, #cantidad6, #cantidad7, #cantidad8, #cantidad9").prop('disabled', false);
+
             $.ajax({
                 url: '../funciones/ingresar/insertIngreso.php',
                 type: 'POST',
@@ -669,5 +689,3 @@ $(document).ready(function() {
     
     
 });
-
-
