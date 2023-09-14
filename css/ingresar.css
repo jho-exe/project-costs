@@ -598,6 +598,26 @@ textarea {
 .menu-back {
     animation: pulse 1.5s infinite; /* Aplicando la animación pulsante al botón */
 }
+/* (Todo tu código CSS original aquí) */
+
+/* Aquí comienzan las media queries para la resolución de 1366px */
+@media (max-width: 1366px) {
+    body {
+      font-size: 16px; /* Ajusta el tamaño de fuente general, si es necesario */
+    }
+  
+    .container {
+      max-width: 100%; 
+      padding: 10px; 
+    }
+  
+    section {
+      grid-template-columns: 1fr  1fr;/* Cambia a una sola columna, si es necesario */
+      gap: 10px; /* Ajusta el espacio, si es necesario */
+    }
+  
+    /* Incluye otras reglas y ajustes específicos para esta resolución aquí */
+  }  
 
 @media only screen and (max-width: 992px) {
     section {
