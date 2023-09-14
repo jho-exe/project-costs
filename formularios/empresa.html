@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenedor de Empresas</title>
+    <link rel="stylesheet" type="text/css" href="../css/empresa.css">
+    <link rel="stylesheet" href="../css/tableexport.min.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../lib/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="title-container">
+        <a href="../index.html" class="menu-back"></a>
+        <h2>Mantenedor de Empresas</h2>
+    </div>
+    
+    <div class="mantenedor">
+        <div class="form-container">
+            <form id="empresaForm" method="post">
+                <input type="hidden" name="empresaId" id="empresaId">
+                <div class="input-group">
+                    <label for="RUT">RUT:</label>
+                    <input type="text" id="RUT" name="RUT">
+                </div>
+                <div class="input-group">
+                    <label for="RazonSocial">Razón Social:</label>
+                    <input type="text" id="RazonSocial" name="RazonSocial">
+                </div>
+                <div class="input-group">
+                    <label for="Direccion">Dirección:</label>
+                    <input type="text" id="Direccion" name="Direccion">
+                </div>
+                <div class="input-group">
+                    <label for="Telefonos">Teléfonos:</label>
+                    <input type="text" id="Telefonos" name="Telefonos">
+                </div>
+                <div class="actions">
+                    <button type="submit" data-id="">Guardar</button>
+                    <button type="button" onclick="location.reload();">Limpiar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar empresa...">
+                <button id="popupButton">Cargar Tabla</button>
+                <button id="exportToExcel">Exportar a Excel</button>
+               
+            </div>
+            
+            <div id="popupContainer" class="popup-container">
+                <div class="toolbar-popup">
+                    <div class="toolbar">
+                        <form action="../subirExcel.php" method="post" enctype="multipart/form-data" class="upload-form">
+                            <label for="fileToUpload" class="upload-label">Seleccione archivo Excel para cargar:</label>
+                            <input type="file" name="fileToUpload" id="fileToUpload" class="upload-input">
+                            <button type="submit" name="submit" class="upload-button">Subir</button>
+                        </form>   
+                    </div>
+                    <button id="cancelButton" class="cancel-button">Cancelar</button>
+                </div>
+            </div>
+            
+            
+            <table id="empresasTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>RUT</th>
+                        <th>Razón Social</th>
+                        <th>Dirección</th>
+                        <th>Teléfonos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        
+    </script>
+    <script src="../js/funciones/empresa.js"></script>
+</body>
+</html>

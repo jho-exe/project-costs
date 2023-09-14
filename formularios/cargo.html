@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenedor de Cargos</title>
+    <link rel="stylesheet" type="text/css" href="../css/cargo.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../lib/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="title-container">
+        <a href="../index.html" class="menu-back"></a>
+        <h2>Mantenedor de Cargos</h2>
+    </div>
+    <div class="mantenedor">
+        <div class="form-container">
+            <form id="cargoForm" method="post">
+                <div class="form-container">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="hidden" id="cargoId" name="id">
+                            <label for="cargo">Cargo:</label>
+                            <input type="text" id="cargo" name="cargo" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label for="sueldo">Sueldo:</label>
+                            <input type="number" step="0.01" id="sueldo" name="sueldo">
+                        </div>
+                        <div class="input-group">
+                            <label for="costohh">Costo HH:</label>
+                            <input type="number" step="0.01" id="costohh" name="costohh">
+                        </div>
+                        <div class="input-group">
+                            <label for="cargo_largo">Cargo Largo:</label>
+                            <input type="text" id="cargo_largo" name="cargo_largo">
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="input-group">
+                            <label for="B_T_Dia">Bono de Tiempo - Día:</label>
+                            <input type="number" step="0.01" id="B_T_Dia" name="B_T_Dia">
+                        </div>
+                        <div class="input-group">
+                            <label for="B_T_Noche">Bono de Tiempo - Noche:</label>
+                            <input type="number" step="0.01" id="B_T_Noche" name="B_T_Noche">
+                        </div>
+                        <div class="input-group">
+                            <label for="B_sab_dom_festivo">Bono sábado/domingo/festivo:</label>
+                            <input type="number" step="0.01" id="B_sab_dom_festivo" name="B_sab_dom_festivo">
+                        </div>
+                        <div class="input-group">
+                            <label for="B_Emergen">Bono Emergencia:</label>
+                            <input type="number" step="0.01" id="B_Emergen" name="B_Emergen">
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button type="submit" data-id="">Guardar</button>
+                    <button type="button" onclick="location.reload();">Limpiar</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="table-container">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar cargo...">
+                <button id="exportToExcel">Exportar a Excel</button>
+            </div>
+            <table id="cargosTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cargo</th>
+                        <th>Sueldo</th>
+                        <th>Costohh</th>
+                        <th>Cargo Largo</th>
+                        <th>B_T_Dia</th>
+                        <th>B_T_Noche</th>
+                        <th>B_sab_dom_festivo</th>
+                        <th>B_Emergen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../js/funciones/cargo.js"></script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/ingresar.css">
+        <link href="../css/select2.min.css" rel="stylesheet" />
+        <script src="../js/jquery-3.7.1.min.js"></script> <!-- Corrección de la ruta de jQuery -->
+        <script src="../js/select2.min.js"></script> <!-- JS para select2, después de jQuery -->
+        <title>Formulario de Ingreso de Servicio</title>
+        <script>
+            
+        </script>
+        
+        
+    </head>
+<body>
+    <div class="container">
+        
+        <form id="ingresoForm" method="post">
+            <div class="title-container">
+                <a href="../index.html" class=" menu-back"></a>
+                <h1 class="title">FORMULARIO DE INGRESO DE SERVICIO</h1>
+                
+            </div>
+            
+                
+            <section>
+                <div class="column">
+                    <h3>Información General</h3>
+                    <label for="numOP">N° OP:</label>
+                    <input type="text" id="numOP" name="numOP" placeholder="Ingrese N° OP" value="0" required>
+
+                    <label for="fechaInicio">Fecha Inicio:</label>
+                    <input type="date" id="fechaInicio" name="fechaInicio" value="0000-00-00">
+                    
+                    <label for="fechaTermino">Fecha Término:</label>
+                    <input type="date" id="fechaTermino" name="fechaTermino" value="0000-00-00">
+                    
+                    <label for="numVenta">N° N. Venta:</label>
+                    <input type="text" id="numVenta" name="numVenta" value="0" placeholder="Ingrese N° N. Venta">
+                    
+                    <label for="">RUT Empresa:</label>
+                    <input type="text" id="rutEmpresa" name="rutEmpresa" placeholder="Ej: 12345678-9">
+                    
+                    <label for="">Nombre Empresa:</label>
+                    <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la Empresa" readonly>
+                    
+                    <label for="servicio">Servicio:</label>
+                    <textarea id="servicio" name="servicio" placeholder="Ingrese nombre del servicio" rows="14" cols="50"></textarea>
+                </div>
+                
+                
+                <div class="column custom-width">
+                    <div class="totals-row">
+                        <div class="total-item">
+                            <h3>Personal Asignado</h3>
+                        </div>
+                        
+                        <div class="total-item box-wrapper">
+                            <div class="bonoTurno">
+                                <label for="bono">Bono Turno:</label>
+                                <select id="bono" name="bono">
+                                    <option value="No_bono">Sin Bono</option>
+                                    <option value="B_T_Dia">B T Dia</option>
+                                    <option value="B_T_Noche">B T Noche</option>
+                                    <option value="B_sab_dom_festivo">B sab, dom, festivo</option>
+                                    <option value="B_Emergen">B Emergen</option>
+                                </select>
+                            </div>
+                            <div class="buttons-container">
+                                <button type="button" id="applyBonoButton" class="btn-apply btn">
+                                    <span class="spinner"></span>
+                                    Aplicar
+                                </button>
+                                <button type="button" id="removeBonoButton" class="btn-remove btn">
+                                    <span class="spinner"></span>
+                                    Quitar
+                                </button>
+                            </div>
+                        </div>                                            
+                    </div>
+
+                    <label for="">Supervisor:</label>
+                    <div class="input-group">
+                        <input type="number" id="supervisor" name="supervisor" class="cargo" value="0">
+                        <input type="number" id="valorSupervisor" name="valorSupervisor" class="valor" value="0" readonly>
+                    </div>
+                    
+                    <label for="">APR:</label>
+                    <div class="input-group">
+                        <input type="number" id="apr" name="apr" class="cargo" value="0">
+                        <input type="number" id="valorApr" name="valorApr" value="0" class="valor" readonly>
+                    </div>
+                    
+                    <label for="">M1:</label>
+                    <div class="input-group">
+                        <input type="number" id="m1" name="m1"  class="cargo" value="0">
+                        <input type="number" id="valorM1" name="valorM1" value="0" class="valor" readonly>
+                    </div>
+                    
+                    <label for="">M2:</label>
+                    <div class="input-group">
+                        <input type="number" id="m2" name="m2"  class="cargo" value="0">
+                        <input type="number" id="valorM2" name="valorM2" value="0" class="valor" readonly>
+                    </div>
+                    
+                    <label for="">Mecánico:</label>
+                    <div class="input-group">
+                        <input type="number" id="mecanico" name="mecanico" class="cargo" value="0">
+                        <input type="number" id="valorMecanico" name="valorMecanico" value="0" class="valor" readonly>
+                    </div>
+                    
+                    <label for="">Ayudante:</label>
+                    <div class="input-group">
+                        <input type="number" id="ayudante" name="ayudante" class="cargo" value="0">
+                        <input type="number" id="valorAyudante" name="valorAyudante" value="0" class="valor" readonly>
+                    </div>
+
+    
+                    <div class="totals-row">
+                        <div class="total-item">
+                            <label for="totalTrabajadores">Tot. Trabaj. Asig.</label>
+                            <input type="number" id="totalTrabajadores" name="totalTrabajadores" class="trabajadores" value="0" readonly placeholder="Ej: 5">
+                        </div>
+                        <div class="total-item">
+                            <label for="totalManoObra">Total Mano de Obra</label>
+                            <input type="number" id="totalManoObra" name="totalManoObra" class="subTotal" value="0" readonly>
+                        </div>
+                    </div>
+                    <div class="container-de-los-botones">
+                        <button type="button" id="calculateButton" class="btn">
+                            <span class="spinner"></span>
+                            Calcular total mano de obra
+                        </button>
+                    </div>
+                    <div class="totals-row services-section">
+                        <div class="total-item">
+                            <label for="tallerTerreno">Taller / Terreno</label>
+                            <select id="tallerTerreno" name="tallerTerreno">
+                                <option value="Taller">TALLER</option>
+                                <option value="Terreno">TERRENO</option>
+                            </select>
+                        </div>
+                        <div class="total-item">
+                            <label for="duracionServicio">Duración Serv.</label>
+                            <input type="number" id="duracionServicio" name="duracionServicio" placeholder="Cantidad de Horas" value="0" class="margen-derecho">
+                        </div>
+                        <div class="total-item">
+                            <label for="totalHoras">Total HH</label>
+                            <input type="number" id="totalHoras" name="totalHoras" value="0" readonly>
+                        </div>
+                    </div>
+                </div>                
+                
+                <div class="column custom-width">
+                    <h3>Vehículos Asignados</h3>
+                    <div class="vehiculos">
+                        <label for="vehiculo1">Vehículo 1:</label>
+                        <select id="vehiculo1" name="vehiculo1"></select>
+                        <input type="number" id="combustible1" name="combustible1" value="0" placeholder="0" readonly>
+                    </div>
+                    
+                    <div class="vehiculos">
+                        <label for="vehiculo2">Vehículo 2:</label>
+                        <select id="vehiculo2" name="vehiculo2"></select>
+                        <input type="number" id="combustible2" name="combustible2" value="0" placeholder="0" readonly>
+                    </div>
+                   
+                    <div class="vehiculos">
+                        <label for="vehiculo3">Vehículo 3:</label>
+                        <select id="vehiculo3" name="vehiculo3"></select>
+                        <input type="number" id="combustible3" name="combustible3" value="0" placeholder="0" readonly>
+                    </div>
+
+                    <label for="totalKilometros">Total Kilómetros:</label>
+                    <input type="number" id="totalKilometros" name="totalKilometros" value="0" placeholder="Total Kilómetros">
+
+                    <div class="totals-row">
+                        <div class="total-item">
+                            <label for="totalPeajes">Total Peajes:</label>
+                            <input type="number" id="totalPeajes" name="totalPeajes" value="0" readonly>
+                        </div>
+                        
+                        <div class="total-item">
+                            <label for="totalCombustible">Total Combustible:</label>
+                            <input type="number" id="totalCombustible" name="totalCombustible" value="0" readonly>
+                        </div>
+                    </div>
+                    
+                    <label for="totalGastosVehiculos">Total Gastos Vehículos:</label>
+                    <input type="number" id="totalGastosVehiculos" name="totalGastosVehiculos" class="subTotal" placeholder="Ej: 5000" value="0" readonly>
+
+                    <div class="total-item">
+                        <button type="button" id="actualizarTotalBtn" class="btn">
+                            <span class="spinner"></span>
+                            Calcular Gastos Vehiculos
+                        </button>
+                    </div>
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea id="observaciones" name="observaciones" placeholder="Ingrese una observacion (opcional)" rows="8" cols="50"></textarea>
+                </div>
+
+                <div class="column">
+                    <div class="">
+                        <h3>Insumos Ocupados en Servicio</h3>
+                         <!-- Comienzan los campos de insumos -->
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo1" name="insumo1"></select>
+                            <input type="number" class="precio" id="precio1" name="precio1" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad1" name="cantidad1" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo2" name="insumo2"></select>
+                            <input type="number" class="precio" id="precio2" name="precio2" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad2" name="cantidad2" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo3" name="insumo3"></select>
+                            <input type="number" class="precio" id="precio3" name="precio3" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad3" name="cantidad3" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo4" name="insumo4"></select>
+                            <input type="number" class="precio" id="precio4" name="precio4" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad4" name="cantidad4" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo5" name="insumo5"></select>
+                            <input type="number" class="precio" id="precio5" name="precio5" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad5" name="cantidad5" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo6" name="insumo6"></select>
+                            <input type="number" class="precio" id="precio6" name="precio6" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad6" name="cantidad6" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo7" name="insumo7"></select>
+                            <input type="number" class="precio" id="precio7" name="precio7" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad7" name="cantidad7" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo8" name="insumo8"></select>
+                            <input type="number" class="precio" id="precio8" name="precio8" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad8" name="cantidad8" value="0" placeholder="0" disabled>
+                        </div>
+                        <div class="insumo">
+                            <select class="select-insumo" id="insumo9" name="insumo9"></select>
+                            <input type="number" class="precio" id="precio9" name="precio9" value="0" placeholder="0" readonly>
+                            <input type="number" class="cantidad" id="cantidad9" name="cantidad9" value="0" placeholder="0" disabled>
+                        </div>
+                        <!-- Aquí se añade el campo de Total Gastos Insumos -->
+                            <label for="totalGastosInsumos">Total Gastos Insumos:</label>
+                            <input type="number" id="totalGastosInsumos" name="totalGastosInsumos" class="subTotal" value="0" placeholder="0" readonly>
+                    </div>
+                
+                    <div class="column-inside">
+                        <h3>Logística</h3>
+                        <div class="alojamientoAlimentacion">
+                            <label for="alojamientos">Alojamientos:</label>
+                            <input type="number" id="alojamientos" name="alojamientos" value="0" placeholder="Ej: 30000">
+                            
+                            <label for="alimentacion">Alimentación:</label>
+                            <input type="number" id="alimentacion" name="alimentacion" value="0" placeholder="Ej: 15000">
+                        </div>
+                        
+                        <div class="variosLane">
+                            <label for="varios">Varios:</label>
+                            <input type="number" id="varios" name="varios" value="0" placeholder="Ej: 20000">
+                        </div>
+
+                        <label for="totalLogistica">Total Logística:</label>
+                        <input type="number" id="totalLogistica" name="totalLogistica" value="0" class="subTotal" placeholder="Ej: 20000" readonly>
+                    </div>
+                    <input type="hidden" id="fecha_modificacion" name="fecha_modificacion" value="0000-00-00">
+                    <input type="hidden" id="fecha_eliminacion" name="fecha_eliminacion" value="0000-00-00">
+                </div>
+            </section>
+            <section id="costo">
+                <div class="total-costo">
+                    <div class="content-left">
+                        <label for="costoTotal">COSTO TOTAL DEL SERVICIO:</label>
+                        <div class="input-button-wrapper">
+                            <input type="number" id="costoTotal" name="costoTotal" class="Total" value="0" placeholder="0" readonly>
+                        </div>
+                    </div>
+                    <div class="content-right">
+                        <button type="submit" data-id="" class="menu-button button-guardar">Guardar</button> 
+                    </div>
+                </div>                              
+            </section>
+        </form>
+    </div>
+    <script src="../js/funciones/ingresar.js"></script>
+</body>
+</html>

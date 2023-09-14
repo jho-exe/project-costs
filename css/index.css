@@ -1,0 +1,102 @@
+/* Variables CSS */
+:root {
+    --primary-color: #009688;
+    --hover-color: #00796b;
+    --background-color: #f2f2f2;
+    --text-color: #333;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 32px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: var(--text-color);
+    margin: 40px 0; /* Margen superior e inferior para separar las secciones */
+    text-align: center;
+}
+
+.options {
+    margin-bottom: 40px;  /* Agregar un margen inferior a la sección options */
+}
+
+.mantenedores {
+    margin-top: 40px;  /* O puedes agregar un margen superior a la sección mantenedores */
+}
+
+.options, .mantenedores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Aumentar este valor incrementará el espacio entre los botones */
+}
+
+.column {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+}
+
+.menu-button {
+    display: inline-block;
+    width: 100px;  /* Tamaño fijo de ancho */
+    height: 50px;  /* Tamaño fijo de altura */
+    padding: 0;  /* Ajustamos el padding a 0 ya que estamos usando un tamaño fijo */
+    line-height: 50px;  /* Esto verticalmente centrará el texto dentro del botón */
+    text-align: center;  /* Asegura que el texto esté centrado horizontalmente */
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 5px; 
+}
+
+
+.menu-button:hover,
+.menu-button:focus {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+}
+
+/* Para accesibilidad, puedes agregar una sombra o algún otro indicador de foco */
+.menu-button:focus {
+    box-shadow: 0 0 0 3px rgba(0,150,136,0.5); /* color semitransparente basado en --primary-color */
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .menu-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
