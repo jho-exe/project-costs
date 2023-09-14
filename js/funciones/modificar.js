@@ -46,6 +46,25 @@ function cargarInsumos() {
 
 
 $(document).ready(function() {
+    $("#debugg").click(function() {
+        const campos = [
+            'id', 'numOP', 'fechaInicio', 'fechaTermino', 'numVenta', 'rutEmpresa', 'nombreEmpresa',
+            'servicio', 'bono', 'supervisor', 'valorSupervisor', 'apr', 'valorApr', 'm1', 'valorM1',
+            'm2', 'valorM2', 'mecanico', 'valorMecanico', 'ayudante', 'valorAyudante', 'totalTrabajadores',
+            'totalManoObra', 'tallerTerreno', 'duracionServicio', 'totalHoras', 'vehiculo1', 'combustible1',
+            'vehiculo2', 'combustible2', 'vehiculo3', 'combustible3', 'totalKilometros', 'totalPeajes',
+            'totalCombustible', 'totalGastosVehiculos', 'observaciones', 'insumo1', 'precio1', 'cantidad1', 'insumo2', 'precio2',
+            'cantidad2', 'insumo3', 'precio3', 'cantidad3', 'insumo4', 'precio4', 'cantidad4', 'insumo5', 'precio5',
+            'cantidad5', 'insumo6', 'precio6', 'cantidad6', 'insumo7', 'precio7', 'cantidad7', 'insumo8', 'precio8',
+            'cantidad8', 'insumo9', 'precio9', 'cantidad9', 'totalGastosInsumos', 'alojamientos', 'alimentacion',
+            'varios', 'totalLogistica','fecha_modificacion', 'fecha_eliminacion', 'costoTotal'
+        ];
+    
+        campos.forEach(campo => {
+            console.log(`${campo}: `, $("#" + campo).val());
+        });
+    });
+    
     cargarVehiculos();
     cargarInsumos();
     $('.searchOP').on('click', function() {
@@ -159,13 +178,13 @@ $(document).ready(function() {
 
     $("#modificarForm").submit(function(event) {
         event.preventDefault();
-    
+        $("#numOp, #cantidad1, #cantidad2, #cantidad3, #cantidad4, #cantidad5, #cantidad6, #cantidad7, #cantidad8, #cantidad9, #supervisor, #apr, #m1, #m2, #mecanico, #ayudante, #bono").prop('disabled', false);
+
         var numOP = $("#numOP").val(); 
         console.log("Valor cantidad4: ", $("#cantidad4").val());
         console.log("Valor cantidad9: ", $("#cantidad9").val());
         // Habilita los campos antes de serializar el formulario
-        $("#numOp, #cantidad1, #cantidad2, #cantidad3, #cantidad4, #cantidad5, #cantidad6, #cantidad7, #cantidad8, #cantidad9").prop('disabled', false);
-    
+
         console.log("Número de OP antes de enviar: ", numOP);
     
         if (numOP && numOP !== "") {
@@ -173,7 +192,6 @@ $(document).ready(function() {
             formData += "&numOP=" + numOP;
     
             console.log("Datos del formulario: ", formData);
-    
             $.post("../funciones/modificar/updateIngresoMod.php", formData)
             .done(function(data) {
                 console.log(data);
@@ -665,6 +683,18 @@ $(document).ready(function() {
         });
         // Establecer el total de mano de obra a 0
         $("#totalManoObra").val(0);
+        $("#valorSupervisor").val(0);
+        $("#valorApr").val(0);
+        $("#valorM1").val(0);
+        $("#valorM2").val(0);
+        $("#valorMecanico").val(0);
+        $("#valorAyudante").val(0);
+        $("#supervisor").val(0);
+        $("#apr").val(0);
+        $("#m1").val(0);
+        $("#m2").val(0);
+        $("#mecanico").val(0);
+        $("#ayudante").val(0);
         // $("#totalTrabajadores").val(0);
         // $("#totalHoras").val(0);
         $('.input-group input:first-child').prop('disabled', false);

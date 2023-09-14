@@ -233,24 +233,30 @@ try {
                 "success" => false,
                 "message" => "Error al actualizar el ingreso."
             );
-
-        if($stmt->execute()) {
-            $response["success"] = true;
-            $response["message"] = "Ingreso actualizado exitosamente.";
-        } else {
+            
+            if($stmt->execute()) {
+                if($stmt->rowCount() > 0) {
+                    $response["success"] = true;
+                    $response["message"] = "Ingreso actualizado exitosamente.";
+                } else {
+                    $response["success"] = false;
+                    $response["message"] = "No se realizaron cambios en el ingreso.";
+                }
+            } else {
+                $response["success"] = false;
+                $response["message"] = "Error al actualizar el ingreso: " . $stmt->errorInfo()[2];
+            }
+            } else {
             $response["success"] = false;
-            $response["message"] = "Error al actualizar el ingreso: " . $stmt->errorInfo()[2];
-        }
-    } else {
-    $response["success"] = false;
-    $response["message"] = "Información incompleta.";
-    }
-} catch(PDOException $e) {
-    $response["success"] = false;
-    $response["message"] = "Error en la consulta: " . $e->getMessage();
-}
-
-echo json_encode($response);
-
-$conn = null;
-?>
+            $response["message"] = "Información incompleta.";
+            }
+            } catch(PDOException $e) {
+            $response["success"] = false;
+            $response["message"] = "Error en la consulta: " . $e->getMessage();
+            }
+            
+            echo json_encode($response);
+            
+            $conn = null;
+            ?>
+            

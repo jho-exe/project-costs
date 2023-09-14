@@ -495,7 +495,7 @@ $(document).ready(function() {
             $('#bono').removeAttr('disabled');
         }
     }
-    
+
     inicializar();
 
 });
@@ -504,7 +504,7 @@ $(document).ready(function() {
     $(document).ready(function(){
         $("#ingresoForm").submit(function(e){
             e.preventDefault();
-            $("#supervisor, #apr, #m1, #m2, #mecanico, #ayudante, #cantidad1, #cantidad2, #cantidad3, #cantidad4, #cantidad5, #cantidad6, #cantidad7, #cantidad8, #cantidad9").prop('disabled', false);
+            $("#bono, #supervisor, #apr, #m1, #m2, #mecanico, #ayudante, #cantidad1, #cantidad2, #cantidad3, #cantidad4, #cantidad5, #cantidad6, #cantidad7, #cantidad8, #cantidad9").prop('disabled', false);
 
             $.ajax({
                 url: '../funciones/ingresar/insertIngreso.php',
