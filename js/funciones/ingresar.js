@@ -504,8 +504,17 @@ $(document).ready(function() {
     $(document).ready(function(){
         $("#ingresoForm").submit(function(e){
             e.preventDefault();
+    
+            // Mostrar el cuadro de diálogo de confirmación
+            var userConfirmed = confirm("¿Deseas agregar este registro?");
+            if (!userConfirmed) {
+                // El usuario hizo clic en "Cancelar", así que deten la operación
+                return;
+            }
+    
+            // Si el usuario hizo clic en "Aceptar", continúa como antes
             $("#bono, #supervisor, #apr, #m1, #m2, #mecanico, #ayudante, #cantidad1, #cantidad2, #cantidad3, #cantidad4, #cantidad5, #cantidad6, #cantidad7, #cantidad8, #cantidad9").prop('disabled', false);
-
+    
             $.ajax({
                 url: '../funciones/ingresar/insertIngreso.php',
                 type: 'POST',
@@ -525,7 +534,7 @@ $(document).ready(function() {
             });
         });
     });
-
+    
     // Obtener vehículos
     $.ajax({
         url: '../funciones/ingresar/getVehiculos.php',

@@ -33,7 +33,7 @@ $(document).ready(function(){
                     $('#ayudante').text(response.ayudante);
                     $('#valorAyudante').text(response.valorAyudante);
                     $('#totalTrabajadores').text(response.totalTrabajadores);
-                    $('#totalManoObra').text(response.totalManoObra);
+                    $('#totalManoObra').text(formatNumber(response.totalManoObra));
                     $('#tallerTerreno').text(response.tallerTerreno);
                     $('#duracionServicio').text(response.duracionServicio);
                     $('#totalHoras').text(response.totalHoras);
@@ -46,7 +46,7 @@ $(document).ready(function(){
                     $('#totalKilometros').text(response.totalKilometros);
                     $('#totalPeajes').text(response.totalPeajes);
                     $('#totalCombustible').text(response.totalCombustible);
-                    $('#totalGastosVehiculos').text(response.totalGastosVehiculos);
+                    $('#totalGastosVehiculos').text(formatNumber(response.totalGastosVehiculos));
                     $('#observaciones').text(response.observaciones);
                     $('#insumo1').text(response.insumo1);
                     $('#precio1').text(response.precio1);
@@ -75,12 +75,12 @@ $(document).ready(function(){
                     $('#insumo9').text(response.insumo9);
                     $('#precio9').text(response.precio9);
                     $('#cantidad9').text(response.cantidad9);
-                    $('#totalGastosInsumos').text(response.totalGastosInsumos);
+                    $('#totalGastosInsumos').text(formatNumber(response.totalGastosInsumos));
                     $('#alojamientos').text(response.alojamientos);
                     $('#alimentacion').text(response.alimentacion);
                     $('#varios').text(response.varios);
-                    $('#totalLogistica').text(response.totalLogistica);
-                    $('#costoTotal').text(response.costoTotal);
+                    $('#totalLogistica').text(formatNumber(response.totalLogistica));
+                    $('#costoTotal').text(formatNumber(response.costoTotal));
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -89,6 +89,10 @@ $(document).ready(function(){
         });
     });
 
+    function formatNumber(number) {
+        return number.toLocaleString('es-ES');
+    }
+    
     $("#btnImprimir").click(function() {
         var currentDate = new Date();
         // Obtener la fecha formateada en un formato legible
